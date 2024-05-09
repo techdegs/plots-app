@@ -3,22 +3,13 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
 import mapboxgl from "mapbox-gl";
 import { parcels } from "@/parcels";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import Modal from "./Modal";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const Map = () => {
   const [selectedPolygon, setSelectedPolygon] = useState(null);
-
-  const handlePop = (polygonIndex) => {
-    console.log("clickd");
-    setSelectedPolygon(polygonIndex);
-  };
 
   const [map, setMap] = useState(null);
   const center = {
@@ -109,9 +100,18 @@ const Map = () => {
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4">
           <div class="font-bold text-xl mb-2">${text}</div>
-          <p class="text-gray-700 text-base">
-            This is your custom content.
-          </p>
+          <hr />
+          <button className="border px-4 py-2 rounded-md">
+            Buy Plot
+          </button>
+
+          <button className="border px-4 py-2 rounded-md">
+            Reserve Plot
+          </button>
+
+          <button className="border px-4 py-2 rounded-md">
+            Call For Info
+          </button>
         </div>
       </div>
     `;
@@ -172,21 +172,6 @@ const Map = () => {
           </>
         ))}
       </GoogleMap>
-
-      {selectedPolygon !== null && (
-        <div className="absolute top-0 left-0 w-full bg-white p-4">
-          <h3 className="text-lg font-bold mb-2">
-            Info for Polygon {selectedPolygon + 1}
-          </h3>
-          {/* Dropdown list with polygon info */}
-          <select className="w-full p-2 border rounded">
-            {/* Populate dropdown options based on your data */}
-            <option value="info1">Info 1</option>
-            <option value="info2">Info 2</option>
-            <option value="info3">Info 3</option>
-          </select>
-        </div>
-      )}
     </div>
   ) : (
     <></>
@@ -194,7 +179,7 @@ const Map = () => {
 };
 
 const mapContainerStyle = {
-  height: "540px",
+  height: "500px",
   width: "1000px",
 };
 
