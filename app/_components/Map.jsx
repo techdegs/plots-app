@@ -3,14 +3,10 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
 import mapboxgl from "mapbox-gl";
 import { parcels } from "@/parcels";
-import { Button } from "@/components/ui/button";
-import Modal from "./Modal";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const Map = () => {
-  const [selectedPolygon, setSelectedPolygon] = useState(null);
-
   const [map, setMap] = useState(null);
   const center = {
     lat: 6.666254591975245,
@@ -95,21 +91,22 @@ const Map = () => {
   };
 
   //Add Content
-  const handleInfo = (coordinates, text) => {
+  var openInfoWindow = null;
+  const handleInfo = (coordinates, text, index) => {
     var contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
-        <div class="px-6 py-4">
+        <div class="px-6 py-4 flex flex-col">
           <div class="font-bold text-xl mb-2">${text}</div>
           <hr />
-          <button className="border px-4 py-2 rounded-md">
+          <button class='border px-4 py-2 mt-3 rounded-md text-base font-normal'>
             Buy Plot
           </button>
 
-          <button className="border px-4 py-2 rounded-md">
+          <button class="border px-4 py-2 my-1 rounded-md text-base font-normal">
             Reserve Plot
           </button>
 
-          <button className="border px-4 py-2 rounded-md">
+          <button class="border px-4 py-2 rounded-md text-base font-normal">
             Call For Info
           </button>
         </div>
@@ -129,12 +126,20 @@ const Map = () => {
     });
     var centroid = bounds.getCenter();
 
+    // Close the previously open info window, if any
+    if (openInfoWindow) {
+      openInfoWindow.close();
+    }
+
     var infoWindow = new google.maps.InfoWindow({
       position: centroid,
       content: contentString,
     });
 
-    infoWindow.open(map);
+    infoWindow.open(map, index);
+
+    // Update the global variable with the newly opened info window
+    openInfoWindow = infoWindow;
   };
 
   return isLoaded ? (
@@ -160,7 +165,8 @@ const Map = () => {
               onClick={() =>
                 handleInfo(
                   feature.geometry.coordinates[0],
-                  feature.properties.Parcel_num
+                  feature.properties.Parcel_num,
+                  index
                 )
               }
             />

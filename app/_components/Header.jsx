@@ -62,14 +62,16 @@ const Header = () => {
                 path == "for-rent" && "text-primary font-semibold"
               }`}
             >
-              For Sale
+              For Rent
             </li>
           </Link>
 
           <li>
             <DropdownMenu>
-              <DropdownMenuTrigger className={`flex border-0`}>
-                Our Sites <ChevronDown />{" "}
+              <DropdownMenuTrigger
+                className={`flex border-0 items-center hover:text-primary font-medium text-sm`}
+              >
+                Our Sites <ChevronDown className="h-5 w-5" />{" "}
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>
@@ -131,40 +133,40 @@ const Header = () => {
       <div className="block lg:hidden xl:hidden ">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-          <Menu />
+            <Menu />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                Profile
-                <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                <Link href={'/w'}
+                  className={`hover:text-primary font-medium text-sm ${
+                    path == "/" && "text-primary font-semibold"
+                  }`}
+                >
+                  Home
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                Billing
-                <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                <Link href={"/for-sale"} className={`hover:text-primary font-medium text-sm ${
+                path == "for-sale" && "text-primary font-semibold"
+              }`}>For Sale</Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                Settings
-                <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Keyboard shortcuts
-                <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                <Link href={"/for-rent"} className={`hover:text-primary font-medium text-sm ${
+                path == "for-rent" && "text-primary font-semibold"
+              }`}>For Rent</Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>Team</DropdownMenuItem>
               <DropdownMenuSub>
-                <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
+                <DropdownMenuSubTrigger>Our Sites</DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
                   <DropdownMenuSubContent>
-                    <DropdownMenuItem>Email</DropdownMenuItem>
-                    <DropdownMenuItem>Message</DropdownMenuItem>
+                    <DropdownMenuItem>NTHC</DropdownMenuItem>
+                    <DropdownMenuItem>Dar Es Salaam</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>More...</DropdownMenuItem>
+                    <DropdownMenuItem>Trabuom</DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuPortal>
               </DropdownMenuSub>
@@ -179,7 +181,7 @@ const Header = () => {
             <DropdownMenuItem disabled>API</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              Log out
+              Login
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuContent>
