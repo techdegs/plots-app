@@ -16,13 +16,9 @@ const GoogleAddressSearch = ({selectedAddress, setCoordinates}) => {
           className: "w-full",
           onChange: (place) => {
             selectedAddress(place);
-            geocodeByAddress(place.label)
+            geocodeByAddress(place?.label)
               .then((result) => getLatLng(result[0]))
               .then(({ lat, lng }) => {
-                // console.log("Successfully got latitude and longitude", {
-                //   lat,
-                //   lng,
-                // });
                 setCoordinates({lat, lng})
               });
           },

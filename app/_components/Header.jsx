@@ -138,7 +138,8 @@ const Header = () => {
           <DropdownMenuContent className="w-56">
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Link href={'/w'}
+                <Link
+                  href={"/"}
                   className={`hover:text-primary font-medium text-sm ${
                     path == "/" && "text-primary font-semibold"
                   }`}
@@ -147,14 +148,24 @@ const Header = () => {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href={"/for-sale"} className={`hover:text-primary font-medium text-sm ${
-                path == "for-sale" && "text-primary font-semibold"
-              }`}>For Sale</Link>
+                <Link
+                  href={"/for-sale"}
+                  className={`hover:text-primary font-medium text-sm ${
+                    path == "for-sale" && "text-primary font-semibold"
+                  }`}
+                >
+                  For Sale
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href={"/for-rent"} className={`hover:text-primary font-medium text-sm ${
-                path == "for-rent" && "text-primary font-semibold"
-              }`}>For Rent</Link>
+                <Link
+                  href={"/for-rent"}
+                  className={`hover:text-primary font-medium text-sm ${
+                    path == "for-rent" && "text-primary font-semibold"
+                  }`}
+                >
+                  For Rent
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
@@ -163,10 +174,38 @@ const Header = () => {
                 <DropdownMenuSubTrigger>Our Sites</DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
                   <DropdownMenuSubContent>
-                    <DropdownMenuItem>NTHC</DropdownMenuItem>
-                    <DropdownMenuItem>Dar Es Salaam</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link
+                        href={"/nthc"}
+                        className={`hover:text-primary font-medium text-sm ${
+                          path == "nthc" && "text-primary font-semibold"
+                        }`}
+                      >
+                        Kwadaso(NTHC)
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link
+                        href={"/dar-es-salaam"}
+                        className={`hover:text-primary font-medium text-sm ${
+                          path == "dar-es-salaam" &&
+                          "text-primary font-semibold"
+                        }`}
+                      >
+                        Dar Es Salaam (Ejisu)
+                      </Link>
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Trabuom</DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <Link
+                        href={"/trabuom"}
+                        className={`hover:text-primary font-medium text-sm ${
+                          path == "trabuom" && "text-primary font-semibold"
+                        }`}
+                      >
+                        Trabuom
+                      </Link>
+                    </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuPortal>
               </DropdownMenuSub>
