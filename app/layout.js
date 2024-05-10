@@ -20,7 +20,9 @@ export default function RootLayout({ children }) {
             {children}
           </Provider>
           <Toaster />{" "}
+
         </body>
+       
       </html>
     </ClerkProvider>
   );

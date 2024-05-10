@@ -24,7 +24,7 @@ const page = () => {
     setLoader(true)
     //Save info to Supabase
     const { data, error } = await supabase
-      .from("listing")
+      .from("listings")
       .insert([
         {
           address: selectedAddress.label,

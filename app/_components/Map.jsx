@@ -7,6 +7,23 @@ import { parcels } from "@/parcels";
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const Map = () => {
+
+  useEffect(() => {
+    
+    const reservePlotBtn = document.querySelector("#reserve_plot_button");
+    if(reservePlotBtn) {
+      console.log('here we go')
+      const clickHandler = () => {
+        console.log("clicked");
+      };
+      reservePlotBtn.addEventListener("click", clickHandler);
+
+      return () => {
+        reservePlotBtn.removeEventListener("click", clickHandler);
+      };
+    }
+  }, []);
+
   const [map, setMap] = useState(null);
   const center = {
     lat: 6.666254591975245,
@@ -90,6 +107,14 @@ const Map = () => {
     });
   };
 
+  function handleBuyPlot(){
+    console.log("Buy Plot button clicked!");
+  }
+
+  const handleReservePlot = (index) => {
+    console.log('index is', index)
+  }
+
   //Add Content
   var openInfoWindow = null;
   const handleInfo = (coordinates, text, index) => {
@@ -98,20 +123,20 @@ const Map = () => {
         <div class="px-6 py-4 flex flex-col">
           <div class="font-bold text-xl mb-2">${text}</div>
           <hr />
-          <button class='border px-4 py-2 mt-3 rounded-md text-base font-normal'>
+          <a href="/nthc/buy-plot/${index}" class="border px-4 py-2 mt-3 rounded-md text-base font-normal">
             Buy Plot
-          </button>
+          </a>
 
-          <button class="border px-4 py-2 my-1 rounded-md text-base font-normal">
+          <a href="/nthc/reserve-plot/${index}" id="reserve_plot_button" class="border px-4 py-2 my-1 rounded-md text-base font-normal">
             Reserve Plot
-          </button>
+          </a>
 
-          <button class="border px-4 py-2 rounded-md text-base font-normal">
+          <a href="tel:0322008282" class="border px-4 py-2 rounded-md text-base font-normal">
             Call For Info
-          </button>
+          </a>
         </div>
       </div>
-    `;
+    `
 
     const polygonCoords = [];
     for (const coord of coordinates) {
@@ -133,19 +158,22 @@ const Map = () => {
 
     var infoWindow = new google.maps.InfoWindow({
       position: centroid,
-      content: contentString,
     });
 
-    infoWindow.open(map, index);
+    infoWindow.setContent(contentString);
+    infoWindow.open(map);
 
     // Update the global variable with the newly opened info window
     openInfoWindow = infoWindow;
   };
 
+
+
+  
   return isLoaded ? (
     <div>
       <GoogleMap
-        key={i}
+        
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={zoom}
@@ -188,5 +216,10 @@ const mapContainerStyle = {
   height: "500px",
   width: "1000px",
 };
+
+function buyPlotClicked() {
+  console.log('Buy Plot button clicked');
+}
+
 
 export default Map;
