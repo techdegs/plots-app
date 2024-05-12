@@ -5,7 +5,7 @@ import { ChevronDown, Menu, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   DropdownMenu,
@@ -29,6 +29,10 @@ const Header = () => {
   useEffect(() => {
     //console log path
   }, []);
+
+  const [showStatusBar, setShowStatusBar] = useState(true);
+  const [showActivityBar, setShowActivityBar] = useState(false);
+  const [showPanel, setShowPanel] = useState(false);
 
   return (
     <div className="flex items-center px-10 py-6 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
@@ -112,16 +116,39 @@ const Header = () => {
       </div>
 
       <div className="lg:flex gap-4 items-center hidden">
-        <Link href={"/add-listing"}>
-          <Button className="flex gap-2">
-            {" "}
-            <Plus className="h-5 w-5" /> Post Property
-          </Button>
-        </Link>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Button className="flex gap-2">
+              {" "}
+              <Plus className="h-5 w-5" /> Post Property
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="p-3">
+            <DropdownMenuItem>
+              <Link
+                href={"/add-house"}
+                className={`hover:text-primary font-medium text-sm ${
+                  path == "add-house" && "text-primary font-semibold"
+                }`}
+              >
+                Add House Listing
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link
+                href={"/add-land"}
+                className={`hover:text-primary font-medium text-sm ${
+                  path == "/add-land" && "text-primary font-semibold"
+                }`}
+              >
+                Add Land Listing
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+
         {isSignedIn ? (
-          <UserButton>
-            <Button variant="outline">{user.email}</Button>
-          </UserButton>
+          <UserButton />
         ) : (
           <Link className="border px-4 py-2 rounded-md" href="/sign-in">
             Login

@@ -8,22 +8,6 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const Map = () => {
 
-  useEffect(() => {
-    
-    const reservePlotBtn = document.querySelector("#reserve_plot_button");
-    if(reservePlotBtn) {
-      console.log('here we go')
-      const clickHandler = () => {
-        console.log("clicked");
-      };
-      reservePlotBtn.addEventListener("click", clickHandler);
-
-      return () => {
-        reservePlotBtn.removeEventListener("click", clickHandler);
-      };
-    }
-  }, []);
-
   const [map, setMap] = useState(null);
   const center = {
     lat: 6.666254591975245,
@@ -107,13 +91,6 @@ const Map = () => {
     });
   };
 
-  function handleBuyPlot(){
-    console.log("Buy Plot button clicked!");
-  }
-
-  const handleReservePlot = (index) => {
-    console.log('index is', index)
-  }
 
   //Add Content
   var openInfoWindow = null;
