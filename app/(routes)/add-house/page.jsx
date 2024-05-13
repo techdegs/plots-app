@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/utils/supabase/client";
 import { useUser } from "@clerk/nextjs";
 import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -11,6 +12,7 @@ const page = () => {
   const [selectedAddress, setSelectedAddress] = useState();
   const [coordinates, setCoordinates] = useState();
   const [loader, setLoader] = useState(false)
+  const router = useRouter()
 
   const { user } = useUser();
 
@@ -30,14 +32,18 @@ const page = () => {
           address: selectedAddress.label,
           coordinates: coordinates,
           createdBy: user?.primaryEmailAddress.emailAddress,
+          username:user?.username,
+          fullName: user?.fullName
         },
       ])
       .select();
 
     //Check Data
     if (data) {
+      const data_id = data[0].id
       setLoader(false)
       toast(`New Address added for listing: , ${data[0].address}`);
+      router.replace("/edit-listing/"+data_id);
     }
     if (error) {
       setLoader(false)

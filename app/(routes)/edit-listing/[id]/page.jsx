@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
@@ -17,11 +17,16 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { supabase } from "@/utils/supabase/client";
 import { useUser } from "@clerk/nextjs";
+import { Loader } from "lucide-react";
+import FileUpload from "../_components/FileUpload";
 
 const EditListing = () => {
   const { id } = useParams();
-  const { user } = useUser();
+  const { user } = useUser()
   const router = useRouter();
+  const [loader, setLoader] = useState(false)
+  const [images, setImages] = useState([])
+  console.log('images', images)
 
   useEffect(() => {
     user && verifyUserRecord();
@@ -42,7 +47,8 @@ const EditListing = () => {
     }
   };
 
-  const onSubmitHandler = async (formValues, { setSubmitting }) => {
+  const onSubmitHandler = async (formValues, { setSubmitting}) => {
+    setLoader(true)
     const title = formValues.title;
     const type = formValues.type;
     const propertyType = formValues.propertyType;
@@ -53,6 +59,7 @@ const EditListing = () => {
     const parking = formValues.parking;
     const houseSize = formValues.houseSize;
     const areaSize = formValues.areaSize;
+    const username = formValues.username
 
     //Save info to Supabase
     const { data, error } = await supabase
@@ -73,12 +80,21 @@ const EditListing = () => {
       .select();
 
     if (data) {
+      setLoader(false)
+      
       setTimeout(() => {
-        toast("Saved and puhlished Successfully");
+        toast("Saved and published Successfully");
         setSubmitting(false);
+        //location.reload()
       }, 400);
+
+      //Save Images
+      for(const image of images){
+
+      }
     }
     if (error) {
+      setLoader(false)
       console.log(error);
     }
   };
@@ -102,6 +118,8 @@ const EditListing = () => {
             parking: "",
             houseSize: "",
             areaSize: "",
+            profileImage:user?.imageUrl,
+            username:user?.fullName
           }}
           validate={(values) => {
             const errors = {};
@@ -169,8 +187,8 @@ const EditListing = () => {
                         <Label htmlFor="for-sell">For Sell</Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="for-rent" id="for-rent" />
-                        <Label htmlFor="For Rent">For Rent</Label>
+                        <RadioGroupItem value="For Rent" id="for-rent" />
+                        <Label htmlFor="for-rent">For Rent</Label>
                       </div>
                     </RadioGroup>
                     <small className="text-red-800">
@@ -338,20 +356,31 @@ const EditListing = () => {
                   </small>
                 </div>
 
+                <div className="mt-5">
+                <h2 className="text-gray-900 font-semibold mb-4">
+                    Upload Files/Images
+                  </h2>
+                  <FileUpload setImages={(value) => setImages(value)} />
+                </div>
+
                 <div className="flex items-center justify-center md:justify-end lg:justify-end gap-6 mt-5">
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="text-primary border bg-white py-2 px-4 rounded-md shadow-md"
                   >
-                    Save to Draft
+                     {
+                    loader ? <Loader className="animate-spin" /> : 'Save To Draft'
+                  }
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="bg-primary text-white py-2 px-4 rounded-md shadow-md"
                   >
-                    Save & Publish
+                     {
+                    loader ? <Loader className="animate-spin" /> : 'Save and Published'
+                  }
                   </button>
                 </div>
               </div>
