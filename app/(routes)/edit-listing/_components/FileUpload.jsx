@@ -1,7 +1,7 @@
 import { X } from "lucide-react";
 import React, { useState } from "react";
 
-const FileUpload = ({ setImages }) => {
+const FileUpload = ({ setImages, dbImages }) => {
   const [imagePreview, setImagePreview] = useState([]);
 
   const [idFiles, setIdFiles] = useState([]);
@@ -35,6 +35,10 @@ const FileUpload = ({ setImages }) => {
     setImagePreview(updatedItems);
 
   };
+
+  const handleImageDBDelete = (index) => {
+    console.log(index)
+  }
 
   return (
     <div>
@@ -100,13 +104,41 @@ const FileUpload = ({ setImages }) => {
                   
                   </button>
                 </div>
-                {image.id}
               </div>
             ))
           ): (
             <></>
           )
         }
+        {
+          dbImages.length > 0 ? (
+            dbImages.map((image) => (
+              <div className="relative" key={image.id}>
+                <img
+                  src={image.url}
+                  alt="preview"
+                  className="w-32 h-32 object-cover rounded-lg shadow-sm border-radius"
+                />
+    
+                <div className="z-20 absolute top-0 right-0 bg-white shadow-md items-center">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleImageDBDelete(image.id);
+                    }}
+                    className="text-center"
+                  >
+                    <X className="text-red-800 p-1" />
+                  
+                  </button>
+                </div>
+              </div>
+            ))
+          ): (
+            <></>
+          )
+        }
+
       </div>
     </div>
   );

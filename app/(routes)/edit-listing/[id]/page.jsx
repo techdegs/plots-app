@@ -22,11 +22,13 @@ import FileUpload from "../_components/FileUpload";
 
 const EditListing = () => {
   const { id } = useParams();
-  const { user } = useUser()
+  const { user } = useUser();
   const router = useRouter();
-  const [loader, setLoader] = useState(false)
-  const [images, setImages] = useState([])
-  console.log('images', images)
+  const [loader, setLoader] = useState(false);
+  const [images, setImages] = useState([]);
+  const [houselisting, setHouseListing] = useState([]);
+  const [dbImages, setDbImages] = useState([])
+  console.log(houselisting);
 
   useEffect(() => {
     user && verifyUserRecord();
@@ -34,21 +36,63 @@ const EditListing = () => {
 
   const verifyUserRecord = async () => {
     const { data, error } = await supabase
+      // .from("houselistings")
+      //   .select("*")
+      //   .eq("createdBy", user?.primaryEmailAddress.emailAddress)
+      //   .eq("id", id);
       .from("houselistings")
-      .select("*")
+      .select("*, houseListingImages(url, listing_id, id)")
       .eq("createdBy", user?.primaryEmailAddress.emailAddress)
       .eq("id", id);
+
+    if (data) {
+      setHouseListing(data[0]);
+      setDbImages(data[0].houseListingImages);
+    }
 
     if (data?.length <= 0) {
       router.replace("/");
     }
-    if(error){
+    if (error) {
       router.replace("/");
     }
   };
 
-  const onSubmitHandler = async (formValues, { setSubmitting}) => {
-    setLoader(true)
+  const uploadImage = async () => {
+    for (const image of images) {
+      const file = image.file;
+      const filename = Date.now().toString();
+      const fileExt = filename.split(".").pop();
+
+      const { data, error } = await supabase.storage
+        .from("houseListingImages")
+        .upload(`${filename}`, file, {
+          contentType: `image/${fileExt}`,
+          upsert: false,
+        });
+
+      if (error) {
+        setLoader(false);
+        toast("Error while uploading images");
+      } else {
+        //Generate image url and save to database
+        const imageUrl = process.env.NEXT_PUBLIC_IMAGE_URL + filename;
+        const { data, error } = await supabase
+          .from("houseListingImages")
+          .insert({ url: imageUrl, listing_id: id });
+
+        if (error) {
+          setLoader(false);
+          toast("Error while uploading images.");
+        }
+      }
+      toast("Uploaded details successfully");
+      setLoader(false);
+    }
+  };
+
+  const onSubmitHandler = async (formValues, { setSubmitting }) => {
+    setLoader(true);
     const title = formValues.title;
     const type = formValues.type;
     const propertyType = formValues.propertyType;
@@ -59,7 +103,7 @@ const EditListing = () => {
     const parking = formValues.parking;
     const houseSize = formValues.houseSize;
     const areaSize = formValues.areaSize;
-    const username = formValues.username
+    const username = formValues.username;
 
     //Save info to Supabase
     const { data, error } = await supabase
@@ -80,21 +124,10 @@ const EditListing = () => {
       .select();
 
     if (data) {
-      setLoader(false)
-      
-      setTimeout(() => {
-        toast("Saved and published Successfully");
-        setSubmitting(false);
-        //location.reload()
-      }, 400);
-
-      //Save Images
-      for(const image of images){
-
-      }
+      uploadImage();
     }
     if (error) {
-      setLoader(false)
+      setLoader(false);
       console.log(error);
     }
   };
@@ -118,8 +151,8 @@ const EditListing = () => {
             parking: "",
             houseSize: "",
             areaSize: "",
-            profileImage:user?.imageUrl,
-            username:user?.fullName
+            profileImage: user?.imageUrl,
+            username: user?.fullName,
           }}
           validate={(values) => {
             const errors = {};
@@ -357,10 +390,10 @@ const EditListing = () => {
                 </div>
 
                 <div className="mt-5">
-                <h2 className="text-gray-900 font-semibold mb-4">
+                  <h2 className="text-gray-900 font-semibold mb-4">
                     Upload Files/Images
                   </h2>
-                  <FileUpload setImages={(value) => setImages(value)} />
+                  <FileUpload dbImages={dbImages} setImages={(value) => setImages(value)} />
                 </div>
 
                 <div className="flex items-center justify-center md:justify-end lg:justify-end gap-6 mt-5">
@@ -369,18 +402,22 @@ const EditListing = () => {
                     disabled={isSubmitting}
                     className="text-primary border bg-white py-2 px-4 rounded-md shadow-md"
                   >
-                     {
-                    loader ? <Loader className="animate-spin" /> : 'Save To Draft'
-                  }
+                    {loader ? (
+                      <Loader className="animate-spin" />
+                    ) : (
+                      "Save To Draft"
+                    )}
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     className="bg-primary text-white py-2 px-4 rounded-md shadow-md"
                   >
-                     {
-                    loader ? <Loader className="animate-spin" /> : 'Save and Published'
-                  }
+                    {loader ? (
+                      <Loader className="animate-spin" />
+                    ) : (
+                      "Save and Published"
+                    )}
                   </button>
                 </div>
               </div>
