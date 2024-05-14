@@ -397,17 +397,7 @@ const EditListing = () => {
                 </div>
 
                 <div className="flex items-center justify-center md:justify-end lg:justify-end gap-6 mt-5">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="text-primary border bg-white py-2 px-4 rounded-md shadow-md"
-                  >
-                    {loader ? (
-                      <Loader className="animate-spin" />
-                    ) : (
-                      "Save To Draft"
-                    )}
-                  </button>
+                  
                   <button
                     type="submit"
                     disabled={isSubmitting}
