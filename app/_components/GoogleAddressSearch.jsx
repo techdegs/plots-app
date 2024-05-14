@@ -11,7 +11,7 @@ const GoogleAddressSearch = ({selectedAddress, setCoordinates}) => {
       <GooglePlacesAutocomplete
         apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY}
         selectProps={{
-          placeholder: "Search Property Address",
+          placeholder: "Search Address",
           isClearable: true,
           className: "w-full",
           onChange: (place) => {

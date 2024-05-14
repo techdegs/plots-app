@@ -34,7 +34,7 @@ const Listing = ({
         />
         <Button onClick={handleSearchClick} className="flex gap-2">
           {" "}
-          <Search className="h-4 w-4" /> Search
+          <Search className="h-4 w-4" /> <span className="hidden lg:block md:block xl:block">Search</span>
         </Button>
       </div>
 
@@ -118,6 +118,8 @@ const Listing = ({
                     </p>
                   </div>
                 </div>
+
+                <Button className="w-full my-2 text-base cursor-pointer">View Details</Button>
               </div>
             ))
           : [1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (

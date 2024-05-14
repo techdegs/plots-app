@@ -15,9 +15,9 @@ const FilterSesction = ({
   setHomeType,
 }) => {
   return (
-    <div className="p-3 py-2 flex flex-wrap gap-2 items-center">
+    <div className="p-1 py-2 flex flex-wrap gap-2 items-center">
       <Select onValueChange={setBedCount}>
-        <SelectTrigger className="w-[140px]">
+        <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="Beds" />
         </SelectTrigger>
         <SelectContent>
@@ -49,7 +49,7 @@ const FilterSesction = ({
       </Select>
 
       <Select onValueChange={setBathCount}>
-        <SelectTrigger className="w-[140px]">
+        <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="Baths" />
         </SelectTrigger>
         <SelectContent>
@@ -81,7 +81,7 @@ const FilterSesction = ({
       </Select>
 
       <Select onValueChange={setParkingCount}>
-        <SelectTrigger className="w-[140px]">
+        <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="Parking" />
         </SelectTrigger>
         <SelectContent>
@@ -112,7 +112,7 @@ const FilterSesction = ({
         // }
         onValueChange={setHomeType}
       >
-        <SelectTrigger className="w-[140px]">
+        <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="Home Type" />
         </SelectTrigger>
         <SelectContent>

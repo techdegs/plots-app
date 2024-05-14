@@ -81,7 +81,7 @@ const ListingMapView = ({ type }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       <div>
         <Listing
           listing={listing}
@@ -100,8 +100,8 @@ const ListingMapView = ({ type }) => {
         />
       </div>
 
-      <div>
-        <GoogleMapSection />
+      <div className="md:fixed lg:fixed xl:fixed w-full right-10 h-full md:w-[420px] lg:w-[520px] xl:w-[640px]">
+        <GoogleMapSection listing={listing} searchedCoordinates={searchedCoordinates} />
       </div>
     </div>
   );

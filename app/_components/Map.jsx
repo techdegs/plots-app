@@ -2,19 +2,22 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
 import mapboxgl from "mapbox-gl";
-import { parcels } from "@/parcels";
+import { nthc } from "@/nthc";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const Map = () => {
-
   const [map, setMap] = useState(null);
   const center = {
-    lat: 6.666254591975245,
-    lng: -1.6611130754452268,
+    lng: -1.6625460029999317,
+    lat: 6.6706109670000728,
+  };
+  const mapContainerStyle = {
+    height: "75vh",
+    width: "85%",
   };
 
-  const zoom = 17.5;
+  const zoom = 17;
 
   const { isLoaded, i } = useJsApiLoader({
     id: "google-map-script",
@@ -82,23 +85,22 @@ const Map = () => {
       },
       label: {
         text: text,
-        color: "#000000", // Label color
-        fontSize: "11px", // Label font size
-        //fontWeight: "bold", // Label font weight
+        color: "#000000",
+        fontSize: "11px",
+        //fontWeight: "bold",
         scale: 0,
       },
       map: map,
     });
   };
 
-
   //Add Content
   var openInfoWindow = null;
-  const handleInfo = (coordinates, text, index) => {
+  const handleInfo = (coordinates, text1, text2, index) => {
     var contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4 flex flex-col">
-          <div class="font-bold text-xl mb-2">${text}</div>
+          <div class="font-bold text-lg mb-2">Plot Number ${text1}, ${text2}</div>
           <hr />
           <a href="/nthc/buy-plot/${index}" class="border px-4 py-2 mt-3 rounded-md text-base font-normal">
             Buy Plot
@@ -113,7 +115,7 @@ const Map = () => {
           </a>
         </div>
       </div>
-    `
+    `;
 
     const polygonCoords = [];
     for (const coord of coordinates) {
@@ -144,20 +146,16 @@ const Map = () => {
     openInfoWindow = infoWindow;
   };
 
-
-
-  
-  return isLoaded ? (
-    <div>
+  return (
+    <div className="w-full ml-16 overflow-x-hidden">
       <GoogleMap
-        
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={zoom}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {parcels.features.map((feature, index) => (
+        {nthc.features.map((feature, index) => (
           <>
             <Polygon
               key={index}
@@ -170,7 +168,8 @@ const Map = () => {
               onClick={() =>
                 handleInfo(
                   feature.geometry.coordinates[0],
-                  feature.properties.Parcel_num,
+                  feature.properties.Plot_Numbe,
+                  feature.properties.St_Name,
                   index
                 )
               }
@@ -178,25 +177,17 @@ const Map = () => {
 
             {markerInfo(
               feature.geometry.coordinates[0],
-              feature.properties.Plot_numbe
+              feature.properties.Plot_Numbe
             )}
           </>
         ))}
       </GoogleMap>
     </div>
-  ) : (
-    <></>
   );
 };
 
-const mapContainerStyle = {
-  height: "500px",
-  width: "1000px",
-};
-
 function buyPlotClicked() {
-  console.log('Buy Plot button clicked');
+  console.log("Buy Plot button clicked");
 }
-
 
 export default Map;
