@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import GoogleAddressSearch from "./GoogleAddressSearch";
 import { Button } from "@/components/ui/button";
 import FilterSesction from "./FilterSesction";
+import Link from "next/link";
 
 const Listing = ({
   listing,
@@ -18,7 +19,7 @@ const Listing = ({
   setHomeType,
 
   showSA,
-  setShowSA
+  setShowSA,
 }) => {
   const [address, setAddress] = useState();
   return (
@@ -26,7 +27,7 @@ const Listing = ({
       <div className="p-1 flex items-center gap-2 justify-between">
         <GoogleAddressSearch
           selectedAddress={(value) => {
-            setShowSA(false)
+            setShowSA(false);
             searchedAddress(value);
             setAddress(value);
           }}
@@ -34,7 +35,8 @@ const Listing = ({
         />
         <Button onClick={handleSearchClick} className="flex gap-2">
           {" "}
-          <Search className="h-4 w-4" /> <span className="hidden lg:block md:block xl:block">Search</span>
+          <Search className="h-4 w-4" />{" "}
+          <span className="hidden lg:block md:block xl:block">Search</span>
         </Button>
       </div>
 
@@ -67,12 +69,14 @@ const Listing = ({
                 key={index}
                 className="shadow-sm rounded p-2 hover:border hover:border-primary"
               >
-                <Image
-                  className="object-cover h-[150px] rounded cursor-pointer"
-                  src={item.houseListingImages[0].url}
-                  width={800}
-                  height={150}
-                />
+                <Link href={'/view-listing/'+item.id}>
+                  <Image
+                    className="object-cover h-[150px] rounded cursor-pointer"
+                    src={item.houseListingImages[0].url}
+                    width={800}
+                    height={150}
+                  />
+                </Link>
                 <div className="flex flex-col gap-2 mt-3">
                   <h2 className="font-bold text-xl text-primary">
                     GHS {item.price.toLocaleString()}
@@ -119,7 +123,9 @@ const Listing = ({
                   </div>
                 </div>
 
-                <Button className="w-full my-2 text-base cursor-pointer">View Details</Button>
+                <Button className="w-full my-2 text-base cursor-pointer">
+                  View Details
+                </Button>
               </div>
             ))
           : [1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (

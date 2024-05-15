@@ -8,7 +8,7 @@ const MarkerItem = ({ item, closeHandler }) => {
     <div>
       <MarkerF
         onClick={() => setSelectedListing(item)}
-        position={item.coordinates}
+        position={item?.coordinates}
         icon={{
           url: "/location-house-pin.png",
           scaledSize: {
