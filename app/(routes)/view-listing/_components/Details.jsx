@@ -3,6 +3,7 @@ import GoogleMapSection from "@/app/_components/GoogleMapSection";
 import { Button } from "@/components/ui/button";
 import { Bath, BedDouble, CarFront, Drill, Home, MapPin, Upload } from "lucide-react";
 import React from "react";
+import AgentDetails from "./AgentDetails";
 
 const Details = ({ listingDetails }) => {
   return (
@@ -69,7 +70,6 @@ const Details = ({ listingDetails }) => {
 
       <div className="p-2">
        
-        
       </div>
 
     </div>

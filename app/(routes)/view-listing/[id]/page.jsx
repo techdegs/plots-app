@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import Slider from "../_components/Slider";
 import Details from "../_components/Details";
 import GoogleMapSection from "@/app/_components/GoogleMapSection";
+import AgentDetails from "../_components/AgentDetails";
 
 const ViewListing = () => {
   const [listingDetails, setListingDetails] = useState();
@@ -48,6 +49,10 @@ const ViewListing = () => {
             searchedCoordinates={listingDetails?.coordinates}
             listing={[listingDetails]}
           />
+        </div>
+        <div className="my-6">
+        <h2 className="text-primary text-2xl font-bold mb-6">Agent Info</h2>
+          <AgentDetails listingDetails={[listingDetails]} />
         </div>
       </div>
     </div>
