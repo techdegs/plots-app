@@ -6,7 +6,7 @@ import React from "react";
 
 const Details = ({ listingDetails }) => {
   return (
-    <div>
+    <div className="ml-6">
       <div className="flex items-center justify-between border-b pb-2 my-4 p-2">
         <div>
           <h2 className="text-primary font-bold text-2xl">GHS {listingDetails?.price.toLocaleString()}</h2>
@@ -15,7 +15,7 @@ const Details = ({ listingDetails }) => {
             <span className="text-base ml-2">{listingDetails?.address}</span>
           </p>
         </div>
-        <Button className="flex items-center bg-primary text-white">
+        <Button className="hidden lg:flex xl:flex items-center bg-primary text-white">
           {" "}
           <Upload /> <span className="text-lg ml-2"> Share</span>
         </Button>
