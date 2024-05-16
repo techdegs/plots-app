@@ -15,7 +15,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
@@ -36,17 +35,17 @@ const Header = () => {
 
   return (
     <div className="flex items-center px-10 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
-      <div className="flex gap-12">
+      <div className="flex gap-14">
         <Link href={"/"}>
           <Image
             src={"/logo.png"}
-            width={150}
-            height={150}
+            width={140}
+            height={140}
             alt="logo"
             className="w-auto h-auto"
           />
         </Link>
-        <ul className="hidden md:hidden lg:flex items-center gap-10">
+        <ul className="hidden md:hidden lg:flex items-center gap-12 ml-12">
           <Link href={"/"}>
             <li
               className={`hover:text-primary font-medium text-sm ${
@@ -101,7 +100,7 @@ const Header = () => {
                       path == "dar-es-salaam" && "text-primary font-semibold"
                     }`}
                   >
-                    Dar Es Salaam
+                    Dar Es Salaam (Ejisu)
                   </Link>
                 </DropdownMenuItem>
 
@@ -122,36 +121,40 @@ const Header = () => {
       </div>
 
       <div className="lg:flex gap-4 items-center hidden">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <Button className="flex gap-2">
-              {" "}
-              <Plus className="h-5 w-5" /> Post Property
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="p-3">
-            <DropdownMenuItem>
-              <Link
-                href={"/add-house"}
-                className={`hover:text-primary font-medium text-sm ${
-                  path == "add-house" && "text-primary font-semibold"
-                }`}
-              >
-                Add House Listing
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link
-                href={"/add-land"}
-                className={`hover:text-primary font-medium text-sm ${
-                  path == "/add-land" && "text-primary font-semibold"
-                }`}
-              >
-                Add Land Listing
-              </Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div>
+          {user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button className="flex gap-2">
+                  {" "}
+                  <Plus className="h-5 w-5" /> Post Property
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="p-3">
+                <DropdownMenuItem>
+                  <Link
+                    href={"/add-house"}
+                    className={`hover:text-primary font-medium text-sm ${
+                      path == "add-house" && "text-primary font-semibold"
+                    }`}
+                  >
+                    Add House Listing
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link
+                    href={"/add-land"}
+                    className={`hover:text-primary font-medium text-sm ${
+                      path == "/add-land" && "text-primary font-semibold"
+                    }`}
+                  >
+                    Add Land Listing
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
 
         {isSignedIn ? (
           // <UserButton />
@@ -196,7 +199,7 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Link className="border px-4 py-2 rounded-md" href="/sign-in">
+          <Link className={`border px-8 py-2 rounded-md bg-primary text-white`} href="/sign-in">
             Login
           </Link>
         )}
@@ -208,7 +211,7 @@ const Header = () => {
           <DropdownMenuTrigger asChild>
             <Menu />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 pl-4 py-4">
+          <DropdownMenuContent className="w-56 pl-4 py-4 mr-3">
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Link
@@ -276,7 +279,7 @@ const Header = () => {
                           path == "trabuom" && "text-primary font-semibold"
                         }`}
                       >
-                        Trabuom
+                        Trabuom Site
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuSubContent>
