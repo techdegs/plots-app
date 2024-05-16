@@ -1,13 +1,23 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import ListingMapView from "./_components/ListingMapView";
 
-export default function Home() {
+import Featured from '@/app/_components/Featured'
+import Footer from '@/app/_components/Footer'
+import Hero from '@/app/_components/Hero'
+import HomeFilters from '@/app/_components/HomeFilters'
+import Invests from '@/app/_components/Invests'
+import Speciality from '@/app/_components/Specialty'
+import React from 'react'
+
+const Home = () => {
   return (
-    <div className="w-full">
-      <div className="px-10 p-10">
-        <ListingMapView type='For Sell' />
-      </div>
+    <div>
+      <Hero />
+      <HomeFilters />
+      <Invests />
+      <Speciality />
+      <Featured />
+      <Footer />
     </div>
-  );
+  )
 }
+
+export default Home

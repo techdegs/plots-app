@@ -29,12 +29,10 @@ const Header = () => {
     //console log path
   }, []);
 
-  const [showStatusBar, setShowStatusBar] = useState(true);
-  const [showActivityBar, setShowActivityBar] = useState(false);
-  const [showPanel, setShowPanel] = useState(false);
+console.log(path)
 
   return (
-    <div className="flex items-center px-10 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
+    <div className="flex items-center px-12 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
       <div className="flex gap-14">
         <Link href={"/"}>
           <Image
@@ -45,30 +43,30 @@ const Header = () => {
             className="w-auto h-auto"
           />
         </Link>
-        <ul className="hidden md:hidden lg:flex items-center gap-12 ml-12">
+        <ul className="hidden md:hidden lg:flex items-center gap-10 ml-12">
           <Link href={"/"}>
             <li
-              className={`hover:text-primary font-medium text-sm ${
-                path == "/" && "text-primary font-semibold"
+              className={`hover:text-primary font-medium text-base ${
+                path == "/" && "text-primary font-extrabold"
               }`}
             >
               Home
             </li>
           </Link>
-          <Link href={"/for-sale"}>
+          <Link href={"/listings"}>
             <li
-              className={`hover:text-primary font-medium text-sm ${
-                path == "for-sale" && "text-primary font-semibold"
+              className={`hover:text-primary font-medium text-base ${
+                path == "/listings" && "text-primary font-extrabold"
               }`}
             >
-              For Sale
+              Listings
             </li>
           </Link>
 
           <Link href={"/for-rent"}>
             <li
-              className={`hover:text-primary font-medium text-sm ${
-                path == "for-rent" && "text-primary font-semibold"
+              className={`hover:text-primary font-medium text-base ${
+                path == "for-rent" && "text-primary font-extrabold"
               }`}
             >
               For Rent
@@ -78,7 +76,7 @@ const Header = () => {
           <li>
             <DropdownMenu>
               <DropdownMenuTrigger
-                className={`flex border-0 items-center hover:text-primary font-medium text-sm`}
+                className={`flex border-0 items-center hover:text-primary font-medium text-base`}
               >
                 Our Sites <ChevronDown className="h-5 w-5" />{" "}
               </DropdownMenuTrigger>
@@ -86,8 +84,8 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/nthc"}
-                    className={`hover:text-primary font-medium text-sm ${
-                      path == "nthc" && "text-primary font-semibold"
+                    className={`hover:text-primary font-medium text-base ${
+                      path == "nthc" && "text-primary font-extrabold"
                     }`}
                   >
                     Kwadaso Site (NTHC)
@@ -96,8 +94,8 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/dar-es-salaam"}
-                    className={`hover:text-primary font-medium text-sm ${
-                      path == "dar-es-salaam" && "text-primary font-semibold"
+                    className={`hover:text-primary font-medium text-base ${
+                      path == "dar-es-salaam" && "text-primary font-extrabold"
                     }`}
                   >
                     Dar Es Salaam (Ejisu)
@@ -107,8 +105,8 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/trabuom"}
-                    className={`hover:text-primary font-medium text-sm ${
-                      path == "trabuom" && "text-primary font-semibold"
+                    className={`hover:text-primary font-medium text-base ${
+                      path == "trabuom" && "text-primary font-extrabold"
                     }`}
                   >
                     Trabuom Site
@@ -134,8 +132,8 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/add-house"}
-                    className={`hover:text-primary font-medium text-sm ${
-                      path == "add-house" && "text-primary font-semibold"
+                    className={`hover:text-primary font-medium text-base ${
+                      path == "add-house" && "text-primary font-extrabold"
                     }`}
                   >
                     Add House Listing
@@ -144,8 +142,8 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/add-land"}
-                    className={`hover:text-primary font-medium text-sm ${
-                      path == "/add-land" && "text-primary font-semibold"
+                    className={`hover:text-primary font-medium text-base ${
+                      path == "/add-land" && "text-primary font-extrabold"
                     }`}
                   >
                     Add Land Listing
@@ -174,8 +172,8 @@ const Header = () => {
               <DropdownMenuItem>
                 <Link
                   href={"/profile"}
-                  className={`hover:text-primary font-medium text-sm ${
-                    path == "/profile" && "text-primary font-semibold"
+                  className={`hover:text-primary font-medium text-base ${
+                    path == "/profile" && "text-primary font-extrabold"
                   }`}
                 >
                   Profile
@@ -184,8 +182,8 @@ const Header = () => {
               <DropdownMenuItem>
                 <Link
                   href={"/profile#/my-listing"}
-                  className={`hover:text-primary font-medium text-sm ${
-                    path == "/listings" && "text-primary font-semibold"
+                  className={`hover:text-primary font-medium text-base ${
+                    path == "/listings" && "text-primary font-extrabold"
                   }`}
                 >
                   My Listings
@@ -193,7 +191,7 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>Manage Account</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-red-700 text-base font-semibold">
+              <DropdownMenuItem className="text-red-700 text-base font-extrabold">
                 <SignOutButton>Logout</SignOutButton>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -216,8 +214,8 @@ const Header = () => {
               <DropdownMenuItem>
                 <Link
                   href={"/"}
-                  className={`hover:text-primary font-medium text-sm ${
-                    path == "/" && "text-primary font-semibold"
+                  className={`hover:text-primary font-medium text-base ${
+                    path == "/" && "text-primary font-bold"
                   }`}
                 >
                   Home
@@ -225,19 +223,19 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  href={"/for-sale"}
-                  className={`hover:text-primary font-medium text-sm ${
-                    path == "for-sale" && "text-primary font-semibold"
+                  href={"/listings"}
+                  className={`hover:text-primary font-medium text-base ${
+                    path == "listings" && "text-primary font-bold"
                   }`}
                 >
-                  For Sale
+                  Listings
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
                   href={"/for-rent"}
-                  className={`hover:text-primary font-medium text-sm ${
-                    path == "for-rent" && "text-primary font-semibold"
+                  className={`hover:text-primary font-medium text-base ${
+                    path == "for-rent" && "text-primary font-bold"
                   }`}
                 >
                   For Rent
@@ -253,8 +251,8 @@ const Header = () => {
                     <DropdownMenuItem>
                       <Link
                         href={"/nthc"}
-                        className={`hover:text-primary font-medium text-sm ${
-                          path == "nthc" && "text-primary font-semibold"
+                        className={`hover:text-primary font-medium text-base ${
+                          path == "nthc" && "text-primary font-extrabold"
                         }`}
                       >
                         Kwadaso(NTHC)
@@ -263,9 +261,9 @@ const Header = () => {
                     <DropdownMenuItem>
                       <Link
                         href={"/dar-es-salaam"}
-                        className={`hover:text-primary font-medium text-sm ${
+                        className={`hover:text-primary font-medium text-base ${
                           path == "dar-es-salaam" &&
-                          "text-primary font-semibold"
+                          "text-primary font-extrabold"
                         }`}
                       >
                         Dar Es Salaam (Ejisu)
@@ -275,8 +273,8 @@ const Header = () => {
                     <DropdownMenuItem>
                       <Link
                         href={"/trabuom"}
-                        className={`hover:text-primary font-medium text-sm ${
-                          path == "trabuom" && "text-primary font-semibold"
+                        className={`hover:text-primary font-medium text-base ${
+                          path == "trabuom" && "text-primary font-extrabold"
                         }`}
                       >
                         Trabuom Site
@@ -287,11 +285,11 @@ const Header = () => {
               </DropdownMenuSub>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex justify-between items-center">
+            {/* <DropdownMenuItem className="flex justify-between items-center">
               <UserButton />
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="font-semibold text-red-600">
+            <DropdownMenuSeparator /> */}
+            <DropdownMenuItem className="font-extrabold text-red-600">
               Login
             </DropdownMenuItem>
           </DropdownMenuContent>
