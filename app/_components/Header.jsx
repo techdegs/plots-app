@@ -1,5 +1,5 @@
 "use client";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, Menu, Plus } from "lucide-react";
 import Image from "next/image";
@@ -35,10 +35,16 @@ const Header = () => {
   const [showPanel, setShowPanel] = useState(false);
 
   return (
-    <div className="flex items-center px-10 py-6 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
+    <div className="flex items-center px-10 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
       <div className="flex gap-12">
         <Link href={"/"}>
-          <Image src={"/logo.png"} width={150} height={150} alt="logo" />
+          <Image
+            src={"/logo.png"}
+            width={150}
+            height={150}
+            alt="logo"
+            className="w-auto h-auto"
+          />
         </Link>
         <ul className="hidden md:hidden lg:flex items-center gap-10">
           <Link href={"/"}>
@@ -148,7 +154,47 @@ const Header = () => {
         </DropdownMenu>
 
         {isSignedIn ? (
-          <UserButton />
+          // <UserButton />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Image
+                src={user?.imageUrl}
+                width={35}
+                height={35}
+                alt="user profile"
+                className="rounded-full"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Link
+                  href={"/profile"}
+                  className={`hover:text-primary font-medium text-sm ${
+                    path == "/profile" && "text-primary font-semibold"
+                  }`}
+                >
+                  Profile
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  href={"/profile#/my-listing"}
+                  className={`hover:text-primary font-medium text-sm ${
+                    path == "/listings" && "text-primary font-semibold"
+                  }`}
+                >
+                  My Listings
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>Manage Account</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-red-700 text-base font-semibold">
+                <SignOutButton>Logout</SignOutButton>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
           <Link className="border px-4 py-2 rounded-md" href="/sign-in">
             Login
@@ -157,12 +203,12 @@ const Header = () => {
       </div>
 
       {/* On Mobile Menu */}
-      <div className="block lg:hidden xl:hidden ">
+      <div className="block lg:hidden xl:hidden">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Menu />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
+          <DropdownMenuContent className="w-56 pl-4 py-4">
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <Link
@@ -236,19 +282,14 @@ const Header = () => {
                   </DropdownMenuSubContent>
                 </DropdownMenuPortal>
               </DropdownMenuSub>
-              <DropdownMenuItem>
-                New Team
-                <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>GitHub</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
-            <DropdownMenuItem disabled>API</DropdownMenuItem>
+            <DropdownMenuItem className="flex justify-between items-center">
+              <UserButton />
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem className="font-semibold text-red-600">
               Login
-              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -50,6 +50,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing }) => {
         zoom={zoom}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        gestureHandling="greedy"
       >
         <div className="relative z-50">
           {listing.map((item, index) => (

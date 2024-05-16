@@ -76,8 +76,19 @@
   }
 
   @media only screen and (max-width: 768px) {
-    mapContainerStyle{
-      height: 60%;
-      width: 45vw;
-    }
+ 
   }
+
+.cl-internal-1c61r6f {
+  box-shadow: none;
+  border: 1px solid #eee
+}
+.cl-internal-lqfubk{
+  display: none;
+}
+.cl-internal-180wb59{
+  display: none;
+}
+.cl-internal-1c61r6f{
+  width: 90vw !important;
+}
