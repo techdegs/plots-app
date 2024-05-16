@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 const HomeFilters = () => {
   return (
-    <div className="px-12 lg:px-24 md:-mt-3r lg:mt-3 mt-3">
+    <div className="px-8 lg:px-24 md:-mt-3r lg:mt-3 mt-3">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-5 gap-2 bg-white p-4 shadow-xl border rounded-md items-center">
         <div className="w-full p-2 rounded-lg bg-slate-100 dark:bg-hover-color-dark card-bordered">
           <h1 className="font-bold">Location</h1>

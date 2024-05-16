@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 const Hero = () => {
   return (
     <div
-      className="relative z-0 flex flex-wrap min-h-screen gap-2 md:-mt-10 flex-center-center pt-12 px-14"
+      className="relative z-0 flex flex-wrap min-h-screen gap-2 mt-0 md:-mt-10 flex-center-center pt-12 md:px-14 px-8"
       style={{
         background: "url('/hero-bg-pattern.png')",
         backgroundRepeat: "no-repeat",
@@ -12,7 +12,7 @@ const Hero = () => {
     >
       <div className="absolute top-0 right-0 rounded-full bg-[#04a7ff]/30 dark:bg-[#04a7ff]/50 w-72 h-72 -z-10 blur-[120px]"></div>
       <div className="flex-1 basis-[20rem] pt-16">
-        <h1 className="text-4xl font-bold capitalize md:text-5xl">
+        <h1 className="text-4xl md:text-5xl font-bold capitalize">
           property consisting <br /> lands and buildings.
         </h1>
         <div className="pl-3 my-7 border-l-4 border-primary w-full">
@@ -45,7 +45,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 basis-[20rem] -mt-8">
+      <div className="flex-1 basis-[20rem] mt-8 md:-mt-8">
         <img src="/hero.png" alt="" className="w-full object-cover" />
       </div>
     </div>
