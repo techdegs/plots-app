@@ -29,9 +29,8 @@ const Header = () => {
     //console log path
   }, []);
 
-
   return (
-    <div className="flex items-center px-8 md:px-12 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
+    <div className="flex items-center px-8 md:px-12 lg:px-12 xl:px-12 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
       <div className="flex gap-14">
         <Link href={"/"}>
           <Image
@@ -196,7 +195,10 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Link className={`border px-8 py-2 rounded-md bg-primary text-white`} href="/sign-in">
+          <Link
+            className={`border px-8 py-2 rounded-md bg-primary text-white`}
+            href="/sign-in"
+          >
             Login
           </Link>
         )}

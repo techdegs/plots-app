@@ -15,7 +15,7 @@ const FilterSesction = ({
   setHomeType,
 }) => {
   return (
-    <div className="p-1 py-2 flex flex-wrap gap-2 items-center">
+    <div className="p-1 flex flex-wrap gap-2 items-center">
       <Select onValueChange={setBedCount}>
         <SelectTrigger className="w-[120px]">
           <SelectValue placeholder="Beds" />

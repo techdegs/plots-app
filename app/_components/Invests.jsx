@@ -53,7 +53,7 @@ const Invests = () => {
             wealth through property 🔑🏠.
           </h1>
           <Link
-            className="flex animate-pulse mt-8 ml-2 text-white border p-2 w-40 text-center"
+            className="flex animate-pulse mt-8 ml-2 lg:ml-10 md:ml-10 text-white border p-2 w-40 text-center"
             href={"/listings"}
           >
             Get Started <ArrowRight className="text-white animate-pulse ml-2" />{" "}

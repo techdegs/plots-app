@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Speciality = () => {
   return (
-    <div className="pt-10 pb-16 px-12">
+    <div className="py-10 pb-16 px-12 md:px-14 lg:px-14">
       <div className="flex flex-wrap gap-10">
         <div className="flex-1 basis-[20rem]">
           <h1 className="p-2 text-primary/80 text-sm bg-cyan-100 rounded-full w-28 text-center">
