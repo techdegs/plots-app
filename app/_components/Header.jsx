@@ -1,7 +1,7 @@
 "use client";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Menu, Plus } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -187,7 +187,6 @@ const Header = () => {
                   My Listings
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>Manage Account</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-red-700 text-base font-extrabold">
                 <SignOutButton>Logout</SignOutButton>
@@ -246,7 +245,9 @@ const Header = () => {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuSub>
-                <DropdownMenuSubTrigger>Our Sites</DropdownMenuSubTrigger>
+                <DropdownMenuSubTrigger className="text-base font-medium hover:text-primary">
+                  Our Sites
+                </DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
                   <DropdownMenuSubContent>
                     <DropdownMenuItem>
@@ -290,9 +291,75 @@ const Header = () => {
               <UserButton />
             </DropdownMenuItem>
             <DropdownMenuSeparator /> */}
-            <DropdownMenuItem className="font-extrabold text-red-600">
-              Login
-            </DropdownMenuItem>
+
+            {isSignedIn ? (
+              // <UserButton />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <div className="flex flex-row items-center gap-1 mt-3">
+                    <p className="ml-1 font-semibold tex-base capitalize">
+                      {user?.username}{" Profile"}
+                    </p>
+                    <ArrowRight className="w-4 h-4" />
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Link
+                      href={"/profile"}
+                      className={`hover:text-primary font-medium text-base ${
+                        path == "/profile" && "text-primary font-extrabold"
+                      }`}
+                    >
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link
+                      href={"/add-home-listing"}
+                      className={`hover:text-primary font-medium text-base ${
+                        path == "/add-home-listing" && "text-primary font-extrabold"
+                      }`}
+                    >
+                      Add Home Listing
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link
+                      href={"/add-land-listing"}
+                      className={`hover:text-primary font-medium text-base ${
+                        path == "/add-land-listing" && "text-primary font-extrabold"
+                      }`}
+                    >
+                      Add Land Listing
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link
+                      href={"/profile#/my-listing"}
+                      className={`hover:text-primary font-medium text-base ${
+                        path == "/listings" && "text-primary font-extrabold"
+                      }`}
+                    >
+                      My Listings
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="text-red-700 text-base font-extrabold">
+                    <SignOutButton>Logout</SignOutButton>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                className={`border px-8 py-2 rounded-md bg-primary text-white`}
+                href="/sign-in"
+              >
+                Login
+              </Link>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

@@ -72,7 +72,7 @@ const Listing = ({
                 <Link href={'/view-listing/'+item.id}>
                   <Image
                     className="object-cover h-[150px] rounded cursor-pointer"
-                    src={item.houseListingImages[0].url}
+                    src={item.houseListingImages[0]?.url}
                     width={800}
                     height={150}
                   />

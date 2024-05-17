@@ -137,7 +137,7 @@ const UserListing = () => {
                         <PencilLine className="w-4 h-4 mr-2" />  Edit
                         </Button>
                       </Link>
-                      <Link href={"/view-user-listing/" + item.id} className="">
+                      <Link href={"/view-listing/" + item.id} className="">
                         <Button className="my-2 text-sm cursor-pointer">
                           <ScanEye className="w-4 h-4 mr-2" /> View 
                         </Button>
