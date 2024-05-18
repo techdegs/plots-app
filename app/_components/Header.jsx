@@ -62,13 +62,13 @@ const Header = () => {
             </li>
           </Link>
 
-          <Link href={"/for-rent"}>
+          <Link href={"/lands"}>
             <li
               className={`hover:text-primary font-medium text-base ${
-                path == "for-rent" && "text-primary font-extrabold"
+                path == "/lands" && "text-primary font-extrabold"
               }`}
             >
-              For Rent
+              Lands
             </li>
           </Link>
 
@@ -236,12 +236,12 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  href={"/for-rent"}
+                  href={"/lands"}
                   className={`hover:text-primary font-medium text-base ${
-                    path == "for-rent" && "text-primary font-bold"
+                    path == "/lands" && "text-primary font-bold"
                   }`}
                 >
-                  For Rent
+                  Lands
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
