@@ -2,16 +2,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
 import mapboxgl from "mapbox-gl";
-import { nthc } from "@/nthc";
+import { parcels } from "@/dar-es-salaam/plotDetails";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-const Map = () => {
+const Map = ({parcels, center}) => {
   const [map, setMap] = useState(null);
-  const center = {
-    lng: -1.6625460029999317,
-    lat: 6.6706109670000728,
-  };
+
   const mapContainerStyle = {
     height: "75vh",
     width: "85%",
@@ -84,7 +81,7 @@ const Map = () => {
         scale: 0, // Set scale to 0 to hide the marker
       },
       label: {
-        text: text,
+        text: text.toString(),
         color: "#000000",
         fontSize: "11px",
         //fontWeight: "bold",
@@ -147,7 +144,7 @@ const Map = () => {
   };
 
   return (
-    <div className="w-full ml-16 overflow-x-hidden">
+    <div className="w-full flex flex-col items-center justify-center">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
@@ -155,7 +152,7 @@ const Map = () => {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {nthc.features.map((feature, index) => (
+        {parcels.features.map((feature, index) => (
           <>
             <Polygon
               key={index}
@@ -168,8 +165,8 @@ const Map = () => {
               onClick={() =>
                 handleInfo(
                   feature.geometry.coordinates[0],
-                  feature.properties.Plot_Numbe,
-                  feature.properties.St_Name,
+                  feature.properties.Plot_No,
+                  feature.properties.Street_Nam,
                   index
                 )
               }
@@ -177,7 +174,7 @@ const Map = () => {
 
             {markerInfo(
               feature.geometry.coordinates[0],
-              feature.properties.Plot_Numbe
+              feature.properties.Plot_No
             )}
           </>
         ))}

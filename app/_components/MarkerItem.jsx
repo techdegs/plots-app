@@ -2,7 +2,7 @@ import { MarkerF, OverlayView } from "@react-google-maps/api";
 import React, { useState } from "react";
 import MarkerListingItem from "./MarkerListingItem";
 
-const MarkerItem = ({ item, closeHandler }) => {
+const MarkerItem = ({ item, closeHandler, images }) => {
   const [selectedListing, setSelectedListing] = useState();
   return (
     <div>
@@ -22,7 +22,7 @@ const MarkerItem = ({ item, closeHandler }) => {
             position={selectedListing.coordinates}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
-            <MarkerListingItem closeHandler={() => setSelectedListing(null)}  item={item}/>
+            <MarkerListingItem closeHandler={() => setSelectedListing(null)}  item={item} images ={images} />
           </OverlayView>
         )}
       </MarkerF>

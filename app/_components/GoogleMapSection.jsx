@@ -6,7 +6,7 @@ import MarkerItem from "./MarkerItem";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-const GoogleMapSection = ({ searchedCoordinates, listing }) => {
+const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
   const [center, setCenter] = useState({
     lat: 6.666254591975245,
     lng: -1.6611130754452268,
@@ -54,7 +54,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing }) => {
       >
         <div className="relative z-50">
           {listing.map((item, index) => (
-            <MarkerItem key={index} item={item} />
+            <MarkerItem key={index} item={item} images={images} />
           ))}
         </div>
       </GoogleMap>

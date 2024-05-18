@@ -1,5 +1,5 @@
 "use client";
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ChevronDown, Menu, Plus } from "lucide-react";
 import Image from "next/image";
@@ -24,6 +24,7 @@ import {
 const Header = () => {
   const path = usePathname();
   const { user, isSignedIn } = useUser();
+  //console.log(user)
 
   useEffect(() => {
     //console log path
@@ -129,9 +130,10 @@ const Header = () => {
               <DropdownMenuContent className="p-3">
                 <DropdownMenuItem>
                   <Link
-                    href={"/add-house"}
+                    href={"/add-house-listing"}
                     className={`hover:text-primary font-medium text-base ${
-                      path == "add-house" && "text-primary font-extrabold"
+                      path == "/add-house-listing" &&
+                      "text-primary font-extrabold"
                     }`}
                   >
                     Add House Listing
@@ -139,9 +141,10 @@ const Header = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link
-                    href={"/add-land"}
+                    href={"/add-land-listing"}
                     className={`hover:text-primary font-medium text-base ${
-                      path == "/add-land" && "text-primary font-extrabold"
+                      path == "/add-land-listing" &&
+                      "text-primary font-extrabold"
                     }`}
                   >
                     Add Land Listing
@@ -298,7 +301,8 @@ const Header = () => {
                 <DropdownMenuTrigger asChild>
                   <div className="flex flex-row items-center gap-1 mt-3">
                     <p className="ml-1 font-semibold tex-base capitalize">
-                      {user?.username}{" Profile"}
+                      {user?.username}
+                      {" Profile"}
                     </p>
                     <ArrowRight className="w-4 h-4" />
                   </div>
@@ -320,7 +324,8 @@ const Header = () => {
                     <Link
                       href={"/add-home-listing"}
                       className={`hover:text-primary font-medium text-base ${
-                        path == "/add-home-listing" && "text-primary font-extrabold"
+                        path == "/add-home-listing" &&
+                        "text-primary font-extrabold"
                       }`}
                     >
                       Add Home Listing
@@ -330,7 +335,8 @@ const Header = () => {
                     <Link
                       href={"/add-land-listing"}
                       className={`hover:text-primary font-medium text-base ${
-                        path == "/add-land-listing" && "text-primary font-extrabold"
+                        path == "/add-land-listing" &&
+                        "text-primary font-extrabold"
                       }`}
                     >
                       Add Land Listing
