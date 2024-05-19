@@ -98,17 +98,17 @@ const Map = ({ parcels, center }) => {
 
   //Add Content
   var openInfoWindow = null;
-  const handleInfo = (coordinates, text1, text2, index) => {
+  const handleInfo = (coordinates, text1, text2, index, id) => {
     var contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4 flex flex-col">
           <div class="font-bold text-lg mb-2">Plot Number ${text1}, ${text2}</div>
           <hr />
-          <a href="/nthc/buy-plot/${index}" class="border px-4 py-2 mt-3 rounded-md text-base font-normal">
+          <a href="/nthc/buy-plot/${id}" class="border px-4 py-2 mt-3 rounded-md text-base font-normal">
             Buy Plot
           </a>
 
-          <a href="/nthc/reserve-plot/${index}" id="reserve_plot_button" class="border px-4 py-2 my-1 rounded-md text-base font-normal">
+          <a href="/nthc/reserve-plot/${id}" id="reserve_plot_button" class="border px-4 py-2 my-1 rounded-md text-base font-normal">
             Reserve Plot
           </a>
 
@@ -172,7 +172,8 @@ const Map = ({ parcels, center }) => {
                   feature.geometry?.coordinates[0],
                   feature.properties?.Plot_No,
                   feature.properties?.Street_Nam,
-                  index
+                  index,
+                  feature.id
                 )
               }
             />

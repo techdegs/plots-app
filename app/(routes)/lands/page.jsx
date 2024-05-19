@@ -1,12 +1,10 @@
 "use client";
 import Map from "@/app/_components/Map";
-import { parcels } from "@/dar-es-salaam/plotDetails";
 import { supabase } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 
 const page = () => {
 
-  var parcels = {}
   const [plots, setPlots] = useState([]);
   const [center, setCenter] = useState({
     lng: -1.4988789106214604,
@@ -19,7 +17,7 @@ const page = () => {
 
   //Fetch Plots from supabase
   const getPlost = async () => {
-    const { data, error } = await supabase.from("dar-es-salaam").select("*");
+    const { data, error } = await supabase.from("dar_es_salaam").select("*");
 
     if (data) {
       setPlots(data);
@@ -37,8 +35,6 @@ const page = () => {
   };
 
 
-
-  console.log(plots)
 
   return (
     <div className="w-full mx-12 overflow-x-hidden mb-8">

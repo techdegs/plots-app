@@ -55,7 +55,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00098204006034521081,
-        "Shape_Area" : 5.9146816693421657e-08
+        "SHAPE_Area" : 5.9146816693421657e-08
       }
     },
     {
@@ -106,7 +106,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0011115293510927256,
-        "Shape_Area" : 7.9936701541567532e-08
+        "SHAPE_Area" : 7.9936701541567532e-08
       }
     },
     {
@@ -161,7 +161,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00088890217766562538,
-        "Shape_Area" : 5.1302094598465016e-08
+        "SHAPE_Area" : 5.1302094598465016e-08
       }
     },
     {
@@ -212,7 +212,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00088879425536324632,
-        "Shape_Area" : 5.1302437138067557e-08
+        "SHAPE_Area" : 5.1302437138067557e-08
       }
     },
     {
@@ -267,7 +267,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093736724325604003,
-        "Shape_Area" : 5.4722027963582474e-08
+        "SHAPE_Area" : 5.4722027963582474e-08
       }
     },
     {
@@ -314,7 +314,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733517649008705,
-        "Shape_Area" : 5.4722302715664519e-08
+        "SHAPE_Area" : 5.4722302715664519e-08
       }
     },
     {
@@ -365,7 +365,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0009369000740215652,
-        "Shape_Area" : 5.4721954094174596e-08
+        "SHAPE_Area" : 5.4721954094174596e-08
       }
     },
     {
@@ -412,7 +412,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733517664463574,
-        "Shape_Area" : 5.4722322145459024e-08
+        "SHAPE_Area" : 5.4722322145459024e-08
       }
     },
     {
@@ -459,7 +459,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733357932947094,
-        "Shape_Area" : 5.4722134063594124e-08
+        "SHAPE_Area" : 5.4722134063594124e-08
       }
     },
     {
@@ -514,7 +514,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.000938096070378403,
-        "Shape_Area" : 5.4722678243089677e-08
+        "SHAPE_Area" : 5.4722678243089677e-08
       }
     },
     {
@@ -565,7 +565,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00088879152701906001,
-        "Shape_Area" : 5.1302158314874753e-08
+        "SHAPE_Area" : 5.1302158314874753e-08
       }
     },
     {
@@ -616,7 +616,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00088898324081550185,
-        "Shape_Area" : 5.1302313990750393e-08
+        "SHAPE_Area" : 5.1302313990750393e-08
       }
     },
     {
@@ -663,7 +663,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733376432258248,
-        "Shape_Area" : 5.472215758174095e-08
+        "SHAPE_Area" : 5.472215758174095e-08
       }
     },
     {
@@ -710,7 +710,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733668016119319,
-        "Shape_Area" : 5.4722489522673081e-08
+        "SHAPE_Area" : 5.4722489522673081e-08
       }
     },
     {
@@ -757,7 +757,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733376439754086,
-        "Shape_Area" : 5.4722157591022883e-08
+        "SHAPE_Area" : 5.4722157591022883e-08
       }
     },
     {
@@ -804,7 +804,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733527020916621,
-        "Shape_Area" : 5.4722323409769247e-08
+        "SHAPE_Area" : 5.4722323409769247e-08
       }
     },
     {
@@ -855,7 +855,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00088898173729523361,
-        "Shape_Area" : 5.1302088212731517e-08
+        "SHAPE_Area" : 5.1302088212731517e-08
       }
     },
     {
@@ -902,7 +902,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733376440805719,
-        "Shape_Area" : 5.4722157592359805e-08
+        "SHAPE_Area" : 5.4722157592359805e-08
       }
     },
     {
@@ -953,7 +953,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0008887920650056401,
-        "Shape_Area" : 5.1302164861911277e-08
+        "SHAPE_Area" : 5.1302164861911277e-08
       }
     },
     {
@@ -1000,7 +1000,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733527021968254,
-        "Shape_Area" : 5.4722323411106222e-08
+        "SHAPE_Area" : 5.4722323411106222e-08
       }
     },
     {
@@ -1051,7 +1051,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0009486264164291706,
-        "Shape_Area" : 4.8792921551621495e-08
+        "SHAPE_Area" : 4.8792921551621495e-08
       }
     },
     {
@@ -1106,7 +1106,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00078650369601846978,
-        "Shape_Area" : 3.7428937544498031e-08
+        "SHAPE_Area" : 3.7428937544498031e-08
       }
     },
     {
@@ -1157,7 +1157,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093693211599559173,
-        "Shape_Area" : 5.4682520235137054e-08
+        "SHAPE_Area" : 5.4682520235137054e-08
       }
     },
     {
@@ -1208,7 +1208,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00089312294420370751,
-        "Shape_Area" : 5.1815120248427818e-08
+        "SHAPE_Area" : 5.1815120248427818e-08
       }
     },
     {
@@ -1259,7 +1259,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00089017808246385881,
-        "Shape_Area" : 5.1473332795857864e-08
+        "SHAPE_Area" : 5.1473332795857864e-08
       }
     },
     {
@@ -1306,7 +1306,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093320552508765542,
-        "Shape_Area" : 5.4209248150726249e-08
+        "SHAPE_Area" : 5.4209248150726249e-08
       }
     },
     {
@@ -1353,7 +1353,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093596343133672735,
-        "Shape_Area" : 5.4551381203153443e-08
+        "SHAPE_Area" : 5.4551381203153443e-08
       }
     },
     {
@@ -1400,7 +1400,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733536393890047,
-        "Shape_Area" : 5.4722344106226768e-08
+        "SHAPE_Area" : 5.4722344106226768e-08
       }
     },
     {
@@ -1447,7 +1447,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733545515071396,
-        "Shape_Area" : 5.4722346921914977e-08
+        "SHAPE_Area" : 5.4722346921914977e-08
       }
     },
     {
@@ -1494,7 +1494,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0009370851779097498,
-        "Shape_Area" : 5.4694695927600557e-08
+        "SHAPE_Area" : 5.4694695927600557e-08
       }
     },
     {
@@ -1541,7 +1541,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00093733526792437504,
-        "Shape_Area" : 5.4722324969929185e-08
+        "SHAPE_Area" : 5.4722324969929185e-08
       }
     },
     {
@@ -1596,7 +1596,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00079016006117419465,
-        "Shape_Area" : 3.7801169417195993e-08
+        "SHAPE_Area" : 3.7801169417195993e-08
       }
     },
     {
@@ -1655,7 +1655,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00088834369234065073,
-        "Shape_Area" : 4.9003395694384794e-08
+        "SHAPE_Area" : 4.9003395694384794e-08
       }
     },
     {
@@ -1706,7 +1706,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00095803932444003554,
-        "Shape_Area" : 5.6677423799409047e-08
+        "SHAPE_Area" : 5.6677423799409047e-08
       }
     },
     {
@@ -1757,7 +1757,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.001034595209438483,
-        "Shape_Area" : 6.4712131452615684e-08
+        "SHAPE_Area" : 6.4712131452615684e-08
       }
     },
     {
@@ -1804,7 +1804,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0011382527254795753,
-        "Shape_Area" : 7.602636043044796e-08
+        "SHAPE_Area" : 7.602636043044796e-08
       }
     },
     {
@@ -1851,7 +1851,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0011632325421265318,
-        "Shape_Area" : 7.3887752991321919e-08
+        "SHAPE_Area" : 7.3887752991321919e-08
       }
     },
     {
@@ -1898,7 +1898,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0011567464488334294,
-        "Shape_Area" : 7.3279638249995397e-08
+        "SHAPE_Area" : 7.3279638249995397e-08
       }
     },
     {
@@ -1953,7 +1953,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.001211174144891307,
-        "Shape_Area" : 8.227699952121009e-08
+        "SHAPE_Area" : 8.227699952121009e-08
       }
     },
     {
@@ -2008,9 +2008,11 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0013003481394415408,
-        "Shape_Area" : 9.7232734573609437e-08
+        "SHAPE_Area" : 9.7232734573609437e-08
       }
     },
+
+
     {
       "type" : "Feature",
       "id" : 41,
@@ -2071,7 +2073,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0013176772173180311,
-        "Shape_Area" : 9.9353805918260992e-08
+        "SHAPE_Area" : 9.9353805918260992e-08
       }
     },
     {
@@ -2118,7 +2120,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0013141654305217853,
-        "Shape_Area" : 1.0136844540738186e-07
+        "SHAPE_Area" : 1.0136844540738186e-07
       }
     },
     {
@@ -2177,7 +2179,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0011667993032158932,
-        "Shape_Area" : 8.1310595103721003e-08
+        "SHAPE_Area" : 8.1310595103721003e-08
       }
     },
     {
@@ -2228,9 +2230,11 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0010560006099952096,
-        "Shape_Area" : 6.7464916316416915e-08
+        "SHAPE_Area" : 6.7464916316416915e-08
       }
     },
+
+
     {
       "type" : "Feature",
       "id" : 45,
@@ -2279,7 +2283,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0011258708290457211,
-        "Shape_Area" : 7.5276060526029229e-08
+        "SHAPE_Area" : 7.5276060526029229e-08
       }
     },
     {
@@ -2334,7 +2338,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0011875952824709768,
-        "Shape_Area" : 8.2130698165905457e-08
+        "SHAPE_Area" : 8.2130698165905457e-08
       }
     },
     {
@@ -2381,9 +2385,11 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0012817305245985469,
-        "Shape_Area" : 9.7416454666827332e-08
+        "SHAPE_Area" : 9.7416454666827332e-08
       }
     },
+
+
     {
       "type" : "Feature",
       "id" : 48,
@@ -2428,7 +2434,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00081524499830204641,
-        "Shape_Area" : 4.1258793472939155e-08
+        "SHAPE_Area" : 4.1258793472939155e-08
       }
     },
     {
@@ -2479,7 +2485,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00084365970888407684,
-        "Shape_Area" : 4.5280210465618842e-08
+        "SHAPE_Area" : 4.5280210465618842e-08
       }
     },
     {
@@ -2526,7 +2532,7 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.00076976581450113467,
-        "Shape_Area" : 3.7006412182439548e-08
+        "SHAPE_Area" : 3.7006412182439548e-08
       }
     },
     {
@@ -2565,7 +2571,7 @@ export const nthc = {
       },
       "properties" : {
         "OBJECTID" : 51,
-        "Plot_No" : " ",
+        "Plot_No" : "24A",
         "Street_Nam" : "",
         "Owner_Info" : "",
         "Amnt_Paid" : "",
@@ -2577,8 +2583,10 @@ export const nthc = {
         "Remarks" : "",
         "Ready" : "",
         "Shape_Length" : 0.0007746163106534396,
-        "Shape_Area" : 3.7488953624030448e-08
+        "SHAPE_Area" : 3.7488953624030448e-08
       }
     }
   ]
 }
+
+console.log(nthc.features.length);

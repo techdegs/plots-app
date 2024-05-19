@@ -1,11 +1,36 @@
 "use client";
 import Map from "@/app/_components/Map";
-import { nthc } from "@/nthc";
+import { supabase } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
 
 const page = () => {
-  const center = {
-    lng: -1.6615226669999288,
-    lat: 6.6696035320000533,
+  const [plots, setPlots] = useState([]);
+  const [center, setCenter] = useState({
+    lng: -1.6633491209999534,
+    lat: 6.6715352750000534,
+  });
+
+  useEffect(() => {
+    getPlost();
+  }, []);
+
+  //Fetch Plots from supabase
+  const getPlost = async () => {
+    const { data, error } = await supabase.from("nthc").select("*");
+
+    if (data) {
+      setPlots(data);
+
+      if (plots.length > 0) {
+        setCenter({
+          lng: plots[0].geometry.coordinates[0][0][1],
+          lat: plots[0].geometry.coordinates[0][0][0],
+        });
+      }
+    }
+    if (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -13,7 +38,7 @@ const page = () => {
       <h1 className="font-bold text-lg my-4 text-center capitalize">
         NTHC SITE
       </h1>
-      <Map geoJsonData={nthc} parcels={nthc} center={center} />
+      <Map geoJsonData={plots} parcels={plots} center={center} />
     </div>
   );
 };
