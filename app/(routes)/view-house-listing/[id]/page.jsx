@@ -35,8 +35,8 @@ const ViewListing = () => {
   };
 
   return (
-    <div className="w-full px-10">
-      <div className="px-12">
+    <div className="w-full">
+      <div className="md:px-12 lg:px-12 px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-5 border-b pb-4">
           <Slider imageLists={listingDetails?.houseListingImages} />
           <Details listingDetails={listingDetails} />

@@ -7,7 +7,7 @@ import AgentDetails from "./AgentDetails";
 
 const Details = ({ listingDetails }) => {
   return (
-    <div className="ml-6">
+    <div className="md:ml-6 lg:ml-6">
       <div className="flex items-center justify-between border-b pb-2 my-4 p-2">
         <div>
           <h2 className="text-primary font-bold text-2xl">GHS {listingDetails?.price.toLocaleString()}</h2>
@@ -24,7 +24,7 @@ const Details = ({ listingDetails }) => {
 
       <div className="p-2">
         <h2 className="text-primary text-xl font-bold">Key Features</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 my-4 gap-3">
+        <div className="grid xs:grid-cols-1 grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 my-4 gap-3">
           <div className="flex items-center justify-center py-1 bg-cyan-100 rounded-sm shadow-sm text-primary p-2 gap-2">
             <Home className="w-5 h-5" />
             <p className="text-base">{listingDetails?.propertyType}</p>

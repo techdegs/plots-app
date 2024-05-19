@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const Slider = ({ imageLists }) => {
   return (
-    <div>
+    <div className="px-10">
       {imageLists?.length > 0 ? (
         <Carousel className="w-full">
           <CarouselContent>
@@ -19,7 +19,7 @@ const Slider = ({ imageLists }) => {
                 <div className="p-1">
                   <CardContent className="flex items-center justify-center p-2 mt-4">
                     <Image
-                      className="rounded-xl object-cover h-[400px] w-full"
+                      className="rounded-xl object-cover md:h-[400px] xl:h-[400px] lg:h-[400px] h-[340px] w-full"
                       src={image.url}
                       width={700}
                       height={300}
