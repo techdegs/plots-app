@@ -8,6 +8,7 @@ import Slider from "../_components/Slider";
 import Details from "../_components/Details";
 import GoogleMapSection from "@/app/_components/GoogleMapSection";
 import AgentDetails from "../_components/AgentDetails";
+import Footer from "@/app/_components/Footer";
 
 const ViewListing = () => {
   const [listingDetails, setListingDetails] = useState();
@@ -56,6 +57,7 @@ const ViewListing = () => {
           <AgentDetails listingDetails={[listingDetails]} />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

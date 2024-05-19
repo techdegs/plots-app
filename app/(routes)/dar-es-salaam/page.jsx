@@ -1,10 +1,10 @@
 "use client";
+import Footer from "@/app/_components/Footer";
 import Map from "@/app/_components/Map";
 import { supabase } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 
 const page = () => {
-
   const [plots, setPlots] = useState([]);
   const [center, setCenter] = useState({
     lng: -1.4988789106214604,
@@ -25,7 +25,7 @@ const page = () => {
       if (plots.length > 0) {
         setCenter({
           lng: plots[0].geometry.coordinates[0][0][1],
-          lat: plots[0].geometry.coordinates[0][0][0]
+          lat: plots[0].geometry.coordinates[0][0][0],
         });
       }
     }
@@ -34,17 +34,17 @@ const page = () => {
     }
   };
 
-
-
   return (
-    <div className="w-full mx-12 overflow-x-hidden mb-8">
-      <h1 className="font-bold text-lg my-4 text-center capitalize">
-        DAR ES SALAAM
-      </h1>
-      <Map geoJsonData={plots} parcels={plots} center={center} />
-    </div>
+    <>
+      <div className="w-full mx-12 overflow-x-hidden mb-8">
+        <h1 className="font-bold text-lg my-4 text-center capitalize">
+          DAR ES SALAAM
+        </h1>
+        <Map geoJsonData={plots} parcels={plots} center={center} />
+      </div>
+      <Footer />
+    </>
   );
 };
 
 export default page;
-

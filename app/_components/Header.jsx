@@ -85,7 +85,11 @@ const Header = () => {
           <li>
             <DropdownMenu>
               <DropdownMenuTrigger
-                className={`flex border-0 items-center hover:text-primary font-medium text-base`}
+                className={`flex border-0 items-center hover:text-primary text-base ${
+                  path === "/nthc" && "text-primary font-extrabold" ||
+                  path === "/dar-es-salaam" && "text-primary font-extrabold" ||
+                  path === "/trabuom" && "text-primary font-extrabold"
+                }`}
               >
                 Our Sites <ChevronDown className="h-5 w-5" />{" "}
               </DropdownMenuTrigger>
@@ -94,7 +98,7 @@ const Header = () => {
                   <Link
                     href={"/nthc"}
                     className={`hover:text-primary text-base ${
-                      path == "nthc" && "text-primary font-extrabold"
+                      path == "/nthc" && "text-primary font-extrabold"
                     }`}
                   >
                     Kwadaso Site (NTHC)
@@ -104,7 +108,7 @@ const Header = () => {
                   <Link
                     href={"/dar-es-salaam"}
                     className={`hover:text-primary text-base ${
-                      path == "dar-es-salaam" && "text-primary font-extrabold"
+                      path == "/dar-es-salaam" && "text-primary font-extrabold"
                     }`}
                   >
                     Dar Es Salaam (Ejisu)
@@ -115,7 +119,7 @@ const Header = () => {
                   <Link
                     href={"/trabuom"}
                     className={`hover:text-primary text-base ${
-                      path == "trabuom" && "text-primary font-extrabold"
+                      path == "/trabuom" && "text-primary font-extrabold"
                     }`}
                   >
                     Trabuom Site

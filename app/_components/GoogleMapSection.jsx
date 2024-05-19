@@ -63,7 +63,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
 };
 
 const mapContainerStyle = {
-  height: "65vh",
+  height: "75vh",
   width: "100%",
   borderRadius: 10,
 };

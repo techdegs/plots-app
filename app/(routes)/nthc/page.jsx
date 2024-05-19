@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/app/_components/Footer";
 import Map from "@/app/_components/Map";
 import { supabase } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
@@ -34,12 +35,15 @@ const page = () => {
   };
 
   return (
-    <div className="w-full mx-12 overflow-x-hidden mb-8">
-      <h1 className="font-bold text-lg my-4 text-center capitalize">
-        NTHC SITE
-      </h1>
-      <Map geoJsonData={plots} parcels={plots} center={center} />
-    </div>
+    <>
+      <div className="w-full mx-12 overflow-x-hidden mb-8">
+        <h1 className="font-bold text-lg my-4 text-center capitalize">
+          NTHC SITE
+        </h1>
+        <Map geoJsonData={plots} parcels={plots} center={center} />
+      </div>
+      <Footer />
+    </>
   );
 };
 
