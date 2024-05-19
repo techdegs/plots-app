@@ -12,7 +12,7 @@ const MarkerListingItem = ({ item, closeHandler, images }) => {
       />
       <Image
         className="object-cover h-[100px] rounded cursor-pointer"
-        src={images[0].url}
+        src={images[0]?.url}
         width={180}
         height={80}
       />

@@ -54,7 +54,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
       >
         <div className="relative z-50">
           {listing.map((item, index) => (
-            <MarkerItem key={index} item={item} images={images} />
+            <MarkerItem key={index} item={item} images={item.houseListingImages} />
           ))}
         </div>
       </GoogleMap>
