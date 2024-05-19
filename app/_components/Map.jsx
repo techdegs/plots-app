@@ -6,13 +6,18 @@ import { parcels } from "@/dar-es-salaam/plotDetails";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-const Map = ({parcels, center}) => {
+const Map = ({ parcels, center }) => {
   const [map, setMap] = useState(null);
 
   const mapContainerStyle = {
     height: "75vh",
     width: "85%",
   };
+
+  // const center = {
+  //   lng: -1.5007916502847063,
+  //   lat: 6.759657505706267,
+  // };
 
   const zoom = 17;
 
@@ -152,11 +157,11 @@ const Map = ({parcels, center}) => {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {parcels.features.map((feature, index) => (
+        {parcels?.map((feature, index) => (
           <>
             <Polygon
               key={index}
-              path={asCoordinates(feature.geometry.coordinates[0])}
+              path={asCoordinates(feature.geometry?.coordinates[0])}
               options={{
                 fillColor: "red",
                 fillOpacity: 0.8,
@@ -164,9 +169,9 @@ const Map = ({parcels, center}) => {
               }}
               onClick={() =>
                 handleInfo(
-                  feature.geometry.coordinates[0],
-                  feature.properties.Plot_No,
-                  feature.properties.Street_Nam,
+                  feature.geometry?.coordinates[0],
+                  feature.properties?.Plot_No,
+                  feature.properties?.Street_Nam,
                   index
                 )
               }
