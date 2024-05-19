@@ -43,7 +43,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
   }, []);
 
   return (
-    <div className="shadow-sm rounded-sm">
+    <div className="shadow-md w-full">
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
@@ -63,7 +63,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
 };
 
 const mapContainerStyle = {
-  height: "75vh",
+  height: "65vh",
   width: "100%",
   borderRadius: 10,
 };

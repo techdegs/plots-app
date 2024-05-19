@@ -48,6 +48,7 @@ const ViewListing = () => {
           <GoogleMapSection
             searchedCoordinates={listingDetails?.coordinates}
             listing={[listingDetails]}
+            images={listingDetails?.houseListingImages}
           />
         </div>
         <div className="my-6">

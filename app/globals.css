@@ -114,3 +114,19 @@ html, body {
 .cl-internal-1c61r6f {
   width: 90vw !important;
 }
+
+.fixed-column {
+  position: fixed;
+  top: 2;
+  right: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -5,7 +5,7 @@ import MarkerListingItem from "./MarkerListingItem";
 const MarkerItem = ({ item, closeHandler, images }) => {
   const [selectedListing, setSelectedListing] = useState();
   return (
-    <div>
+    <div className="w-full">
       <MarkerF
         onClick={() => setSelectedListing(item)}
         position={item?.coordinates}

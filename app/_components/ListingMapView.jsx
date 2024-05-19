@@ -81,8 +81,8 @@ const ListingMapView = ({ type }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <div>
+    <div className="flex gap-6 w-full flex-wrap md:flex-nowrap">
+      <div className="w-full md:w-1/2 lg:w-1/2 overflow-y-scroll h-screen no-scrollbar pr-3">
         <Listing
           listing={listing}
           handleSearchClick={handleSearchClick}
@@ -100,7 +100,7 @@ const ListingMapView = ({ type }) => {
         />
       </div>
 
-      <div className="md:fixed lg:fixed xl:fixed w-full right-10 h-full md:w-[420px] lg:w-[520px] xl:w-[640px]">
+      <div className="w-full md:w-1/2 lg:w-1/2 fixed-column ml-8 hidden md:block lg:block xl:block">
         <GoogleMapSection listing={listing} searchedCoordinates={searchedCoordinates} />
       </div>
     </div>

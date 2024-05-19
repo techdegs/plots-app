@@ -42,10 +42,10 @@ const Header = () => {
             className="w-auto h-auto"
           />
         </Link>
-        <ul className="hidden md:hidden lg:flex items-center gap-10 ml-12">
+        <ul className="hidden md:hidden lg:flex items-center gap-8 ml-10">
           <Link href={"/"}>
             <li
-              className={`hover:text-primary font-medium text-base ${
+              className={`hover:text-primary text-base ${
                 path == "/" && "text-primary font-extrabold"
               }`}
             >
@@ -54,7 +54,7 @@ const Header = () => {
           </Link>
           <Link href={"/listings"}>
             <li
-              className={`hover:text-primary font-medium text-base ${
+              className={`hover:text-primary text-base ${
                 path == "/listings" && "text-primary font-extrabold"
               }`}
             >
@@ -62,13 +62,23 @@ const Header = () => {
             </li>
           </Link>
 
-          <Link href={"/lands"}>
+          <Link href={"/get-plot"}>
             <li
-              className={`hover:text-primary font-medium text-base ${
-                path == "/lands" && "text-primary font-extrabold"
+              className={`hover:text-primary text-base ${
+                path == "/get-plot" && "text-primary font-extrabold"
               }`}
             >
-              Lands
+              Get Plot
+            </li>
+          </Link>
+
+          <Link href={"/get-home"}>
+            <li
+              className={`hover:text-primary text-base ${
+                path == "/get-home" && "text-primary font-extrabold"
+              }`}
+            >
+              Get Home
             </li>
           </Link>
 
@@ -83,7 +93,7 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/nthc"}
-                    className={`hover:text-primary font-medium text-base ${
+                    className={`hover:text-primary text-base ${
                       path == "nthc" && "text-primary font-extrabold"
                     }`}
                   >
@@ -93,7 +103,7 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/dar-es-salaam"}
-                    className={`hover:text-primary font-medium text-base ${
+                    className={`hover:text-primary text-base ${
                       path == "dar-es-salaam" && "text-primary font-extrabold"
                     }`}
                   >
@@ -104,7 +114,7 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/trabuom"}
-                    className={`hover:text-primary font-medium text-base ${
+                    className={`hover:text-primary text-base ${
                       path == "trabuom" && "text-primary font-extrabold"
                     }`}
                   >
@@ -236,12 +246,22 @@ const Header = () => {
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  href={"/lands"}
+                  href={"/get-plot"}
                   className={`hover:text-primary font-medium text-base ${
-                    path == "/lands" && "text-primary font-bold"
+                    path == "/get-plot" && "text-primary font-bold"
                   }`}
                 >
-                  Lands
+                  Get Plot
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  href={"/get-home"}
+                  className={`hover:text-primary font-medium text-base ${
+                    path == "/get-home" && "text-primary font-bold"
+                  }`}
+                >
+                  Get Home
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
