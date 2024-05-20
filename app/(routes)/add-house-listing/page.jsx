@@ -181,6 +181,8 @@ const page = () => {
               }
               if (!values.price) {
                 errors.price = "Price is required";
+              }else if (/^\d+$/.test(values.price)) {
+                errors.price = 'Invalid amount';
               }
               if (!values.bedrooms) {
                 errors.bedrooms = "Bedrooms is required";
@@ -366,7 +368,7 @@ const page = () => {
                       <Input
                         placeholder="Ex.1900 Sq.ft"
                         name="areaSize"
-                        type="text"
+                        type="number"
                         onChange={handleChange}
                         value={values.areaSize}
                       />
@@ -412,7 +414,7 @@ const page = () => {
                   <div className="flex items-center justify-center md:justify-end lg:justify-end gap-6 mt-5 pb-6">
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      // disabled={isSubmitting}
                       className="bg-primary text-white py-2 px-4 rounded-md shadow-md"
                     >
                       {loader ? (

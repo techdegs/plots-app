@@ -362,7 +362,7 @@ const HeaderAlt = () => {
                         path == "/add-house-listing" &&
                         "text-primary font-semibold"
                       }`}
-                      onClick={() => router.push("/add-home-listing")}
+                      onClick={() => router.push("/add-house-listing")}
                     >
                       Add Home Listing
                     </button>

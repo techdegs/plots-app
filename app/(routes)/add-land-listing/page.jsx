@@ -275,7 +275,7 @@ const page = () => {
                       <Input
                         placeholder="Land Size"
                         name="areaSize"
-                        type="text"
+                        type="number"
                         onChange={handleChange}
                         value={values.areaSize}
                       />
@@ -289,7 +289,7 @@ const page = () => {
                         Price (GHS)
                       </h2>
                       <Input
-                        placeholder="40000"
+                        placeholder="12345"
                         name="price"
                         type="number"
                         onChange={handleChange}
@@ -321,7 +321,6 @@ const page = () => {
                   <div className="flex items-center justify-center md:justify-end lg:justify-end gap-6 mt-5 pb-6">
                     <button
                       type="submit"
-                      disabled={isSubmitting}
                       className="bg-primary text-white py-2 px-4 rounded-md shadow-md"
                     >
                       {loader ? (
