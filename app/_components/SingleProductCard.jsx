@@ -55,7 +55,7 @@ const SingleProductCard = ({ property }) => {
         </div>
 
         <div className="mt-4 flex items-center justify-between">
-          <h1 className="text-lg font-semibold text-primary">GHS. {property.price}</h1>
+          <h1 className="text-lg font-semibold text-primary">GHS. {property.price.toLocaleString()}</h1>
           <Link
             href={"/view-house-listing/"+property.id}
             className="btn btn-secondary animate-pulse flex items-center hover:underline"
