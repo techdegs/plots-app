@@ -25,19 +25,19 @@ const Speciality = () => {
               </div>
               <p>Outstanding Property</p>
             </div>
-            <div className="mt-2 flex flex-align-center gap-x-2">
+            <div className="flex flex-align-center gap-x-2">
               <div className="text-primary/80 rounded-full bg-cyan-100">
                 <Check className="p-1" />
               </div>
               <p>Professional and experienced human resource</p>
             </div>
-            <div className="mt-2 flex flex-align-center gap-x-2">
+            <div className="flex flex-align-center gap-x-2">
               <div className="text-primary/80 rounded-full bg-cyan-100">
                 <Check className="p-1" />
               </div>
               <p>Provide the best services for users</p>
             </div>
-            <div className="mt-2 flex flex-align-center gap-x-2">
+            <div className="flex flex-align-center gap-x-2">
               <div className="text-primary/80 rounded-full bg-cyan-100">
                 <Check className="p-1" />
               </div>

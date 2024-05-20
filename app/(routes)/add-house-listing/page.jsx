@@ -181,8 +181,6 @@ const page = () => {
               }
               if (!values.price) {
                 errors.price = "Price is required";
-              }else if (/^\d+$/.test(values.price)) {
-                errors.price = 'Invalid amount';
               }
               if (!values.bedrooms) {
                 errors.bedrooms = "Bedrooms is required";
