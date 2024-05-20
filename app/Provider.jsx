@@ -19,6 +19,7 @@ const Provider = ({ children }) => {
           "drawing",
         ]}
       >
+        {/* <Header /> */}
         <Header />
         <div className="flex flex-col items-center mt-[8rem]">{children}</div>
       </LoadScript>

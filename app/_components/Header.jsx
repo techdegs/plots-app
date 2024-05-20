@@ -1,10 +1,10 @@
 "use client";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ChevronDown, Menu, Plus } from "lucide-react";
+import { ArrowRight, ChevronDown, Home, Menu, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import {
@@ -21,115 +21,132 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const Header = () => {
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+import ListItem from "./ListItem";
+
+const HeaderAlt = () => {
   const path = usePathname();
   const { user, isSignedIn } = useUser();
-  //console.log(user)
+  const router = useRouter();
 
   useEffect(() => {
-    //console log path
-  }, []);
+    router.prefetch('/add-house-listing')
+    router.prefetch('/add-land-listing')
+    router.prefetch('/dar-es-salaam')
+    router.prefetch('/get-home')
+    router.prefetch('/get-plot')
+    router.prefetch('/nthc')
+    router.prefetch('/trabuom')
+  }, [])
 
   return (
     <div className="flex items-center px-8 md:px-12 lg:px-12 xl:px-12 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
-      <div className="flex gap-14">
-        <Link href={"/"}>
-          <Image
-            src={"/logo.png"}
-            width={140}
-            height={140}
-            alt="logo"
-            className="w-auto h-auto"
-          />
-        </Link>
-        <ul className="hidden md:hidden lg:flex items-center gap-8 ml-10">
-          <Link href={"/"}>
-            <li
-              className={`hover:text-primary text-base ${
-                path == "/" && "text-primary font-extrabold"
-              }`}
-            >
+      <NavigationMenu className="flex gap-14 items-center">
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <Link href={"/"}>
+              <Image
+                src={"/logo.png"}
+                width={125}
+                height={125}
+                alt="logo"
+                className="w-auto h-auto object-cover"
+              />
+            </Link>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+
+        <NavigationMenuList className="hidden md:hidden lg:flex items-center gap-2 ml-10">
+          <NavigationMenuItem>
+            <ListItem href={"/"} title={"Home"}>
               Home
-            </li>
-          </Link>
-          <Link href={"/listings"}>
-            <li
-              className={`hover:text-primary text-base ${
-                path == "/listings" && "text-primary font-extrabold"
-              }`}
-            >
-              Listings
-            </li>
-          </Link>
+            </ListItem>
+          </NavigationMenuItem>
 
-          <Link href={"/get-plot"}>
-            <li
-              className={`hover:text-primary text-base ${
-                path == "/get-plot" && "text-primary font-extrabold"
-              }`}
-            >
+          <NavigationMenuItem>
+            <ListItem href={"/get-plot"} title={"Get Plot"}>
               Get Plot
-            </li>
-          </Link>
+            </ListItem>
+          </NavigationMenuItem>
 
-          <Link href={"/get-home"}>
-            <li
-              className={`hover:text-primary text-base ${
-                path == "/get-home" && "text-primary font-extrabold"
+          <NavigationMenuItem>
+            <ListItem href={"/get-home"} title={"Get Home"}>
+              Get Home
+            </ListItem>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <NavigationMenuTrigger
+              className={`flex border-0 items-center hover:text-primary text-base ${
+                (path === "/nthc" && "text-primary font-extrabold") ||
+                (path === "/dar-es-salaam" && "text-primary font-extrabold") ||
+                (path === "/trabuom" && "text-primary font-extrabold")
               }`}
             >
-              Get Home
-            </li>
-          </Link>
+              Our Sites
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className="">
+              <ul className="grid gap-3 p-3 py-5 md:w-[200px] lg:w-[230px] xl:w-[240px] grid-cols-1">
+                <ListItem href="/nthc" title="NTHC">
+                  NTHC (Kwadaso)
+                </ListItem>
+                <ListItem href="/dar-es-salaam" title="Dar Es Salaam">
+                  Dar Es Salaam (Ejisu)
+                </ListItem>
+                <ListItem href="/trabuom" title="Trabuom">
+                  Trabuom
+                </ListItem>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
 
-          <li>
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                className={`flex border-0 items-center hover:text-primary text-base ${
-                  path === "/nthc" && "text-primary font-extrabold" ||
-                  path === "/dar-es-salaam" && "text-primary font-extrabold" ||
-                  path === "/trabuom" && "text-primary font-extrabold"
-                }`}
-              >
-                Our Sites <ChevronDown className="h-5 w-5" />{" "}
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>
-                  <Link
-                    href={"/nthc"}
-                    className={`hover:text-primary text-base ${
-                      path == "/nthc" && "text-primary font-extrabold"
-                    }`}
-                  >
-                    Kwadaso Site (NTHC)
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link
-                    href={"/dar-es-salaam"}
-                    className={`hover:text-primary text-base ${
-                      path == "/dar-es-salaam" && "text-primary font-extrabold"
-                    }`}
-                  >
-                    Dar Es Salaam (Ejisu)
-                  </Link>
-                </DropdownMenuItem>
-
-                <DropdownMenuItem>
-                  <Link
-                    href={"/trabuom"}
-                    className={`hover:text-primary text-base ${
-                      path == "/trabuom" && "text-primary font-extrabold"
-                    }`}
-                  >
-                    Trabuom Site
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </li>
-        </ul>
-      </div>
+          {/* <NavigationMenuItem>
+            <NavigationMenuTrigger
+              className={`flex border-0 items-center hover:text-primary text-base ${
+                (path === "/about-us" && "text-primary font-extrabold") ||
+                (path === "/contact-us" && "text-primary font-extrabold") ||
+                (path === "/terms-of-use" && "text-primary font-extrabold") ||
+                (path === "/services" && "text-primary font-extrabold") ||
+                (path === "/portfolio" && "text-primary font-extrabold") ||
+                (path === "/faqs" && "text-primary font-extrabold")
+              }`}
+            >
+              Pages
+            </NavigationMenuTrigger>
+            <NavigationMenuContent className="">
+              <ul className="grid gap-3 p-3 py-5 md:w-[200px] lg:w-[230px] xl:w-[240px] grid-cols-1">
+                <ListItem href="/about-us" title="About Us">
+                  About Us
+                </ListItem>
+                <ListItem href="/dar-es-salaam" title="Contact Us">
+                  Contact Us
+                </ListItem>
+                <ListItem href="/terms-of-use" title="Terms of Use">
+                  Terms of Use
+                </ListItem>
+                <ListItem href="/services" title="Services">
+                  services
+                </ListItem>
+                <ListItem href="/portfolio" title="Portfolio">
+                  Portfolio
+                </ListItem>
+                <ListItem href="/faqs" title="faqs">
+                  FAQs
+                </ListItem>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem> */}
+        </NavigationMenuList>
+      </NavigationMenu>
 
       <div className="lg:flex gap-4 items-center hidden">
         <div>
@@ -145,7 +162,7 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/add-house-listing"}
-                    className={`hover:text-primary font-medium text-base ${
+                    className={`hover:text-primary text-base ${
                       path == "/add-house-listing" &&
                       "text-primary font-extrabold"
                     }`}
@@ -156,7 +173,7 @@ const Header = () => {
                 <DropdownMenuItem>
                   <Link
                     href={"/add-land-listing"}
-                    className={`hover:text-primary font-medium text-base ${
+                    className={`hover:text-primary text-base ${
                       path == "/add-land-listing" &&
                       "text-primary font-extrabold"
                     }`}
@@ -172,7 +189,7 @@ const Header = () => {
         {isSignedIn ? (
           // <UserButton />
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger>
               <Image
                 src={user?.imageUrl}
                 width={35}
@@ -229,85 +246,80 @@ const Header = () => {
           <DropdownMenuContent className="w-56 pl-4 py-4 mr-3">
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <Link
-                  href={"/"}
-                  className={`hover:text-primary font-medium text-base ${
-                    path == "/" && "text-primary font-bold"
+                <button
+                  className={`hover:text-primary text-base ${
+                    path == "/" && "text-primary font-semibold"
                   }`}
+                  onClick={() => router.replace("/")}
                 >
                   Home
-                </Link>
+                </button>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link
-                  href={"/listings"}
-                  className={`hover:text-primary font-medium text-base ${
-                    path == "listings" && "text-primary font-bold"
+                <button
+                  className={`hover:text-primary text-base ${
+                    path == "/get-plot" && "text-primary font-semibold"
                   }`}
-                >
-                  Listings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  href={"/get-plot"}
-                  className={`hover:text-primary font-medium text-base ${
-                    path == "/get-plot" && "text-primary font-bold"
-                  }`}
+                  onClick={() => router.push("/get-plot")}
                 >
                   Get Plot
-                </Link>
+                </button>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <Link
-                  href={"/get-home"}
-                  className={`hover:text-primary font-medium text-base ${
-                    path == "/get-home" && "text-primary font-bold"
+                <button
+                  className={`hover:text-primary text-base ${
+                    path == "/get-home" && "text-primary font-semibold"
                   }`}
+                  onClick={() => router.push("/get-home")}
                 >
                   Get Home
-                </Link>
+                </button>
               </DropdownMenuItem>
             </DropdownMenuGroup>
+
             <DropdownMenuSeparator />
+
             <DropdownMenuGroup>
               <DropdownMenuSub>
-                <DropdownMenuSubTrigger className="text-base font-medium hover:text-primary">
-                  Our Sites
+                <DropdownMenuSubTrigger
+                  asChildren
+                  className="text-base hover:text-primary"
+                >
+                  <Link href={''}>Our Sites</Link>
                 </DropdownMenuSubTrigger>
                 <DropdownMenuPortal>
-                  <DropdownMenuSubContent>
+                  <DropdownMenuSubContent className="p-3">
                     <DropdownMenuItem>
-                      <Link
-                        href={"/nthc"}
-                        className={`hover:text-primary font-medium text-base ${
-                          path == "nthc" && "text-primary font-extrabold"
+                      <button
+                        className={`hover:text-primary text-base ${
+                          path == "/nthc" && "text-primary font-semibold"
                         }`}
+                        onClick={() => router.push("/nthc")}
                       >
-                        Kwadaso(NTHC)
-                      </Link>
+                        NTHC
+                      </button>
                     </DropdownMenuItem>
                     <DropdownMenuItem>
-                      <Link
-                        href={"/dar-es-salaam"}
-                        className={`hover:text-primary font-medium text-base ${
-                          path == "dar-es-salaam" &&
-                          "text-primary font-extrabold"
+                      <button
+                        className={`hover:text-primary text-base ${
+                          path == "/dar-es-salaam" &&
+                          "text-primary font-semibold"
                         }`}
+                        onClick={() => router.push("/dar-es-salaam")}
                       >
-                        Dar Es Salaam (Ejisu)
-                      </Link>
+                        Dar Es Salaam
+                      </button>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                      <Link
-                        href={"/trabuom"}
-                        className={`hover:text-primary font-medium text-base ${
-                          path == "trabuom" && "text-primary font-extrabold"
+                      <button
+                        className={`hover:text-primary text-base ${
+                          path == "/trabuom" && "text-primary font-semibold"
                         }`}
+                        onClick={() => router.push("/trabuom")}
                       >
-                        Trabuom Site
-                      </Link>
+                        Trabuom
+                      </button>
                     </DropdownMenuItem>
                   </DropdownMenuSubContent>
                 </DropdownMenuPortal>
@@ -335,46 +347,47 @@ const Header = () => {
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <Link
-                      href={"/profile"}
-                      className={`hover:text-primary font-medium text-base ${
-                        path == "/profile" && "text-primary font-extrabold"
+                    <button
+                      className={`hover:text-primary text-base ${
+                        path == "/profile" && "text-primary font-semibold"
                       }`}
+                      onClick={() => router.push("/profile")}
                     >
-                      Profile
-                    </Link>
+                      My Profile
+                    </button>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link
-                      href={"/add-home-listing"}
-                      className={`hover:text-primary font-medium text-base ${
-                        path == "/add-home-listing" &&
-                        "text-primary font-extrabold"
+                    <button
+                      className={`hover:text-primary text-base ${
+                        path == "/add-house-listing" &&
+                        "text-primary font-semibold"
                       }`}
+                      onClick={() => router.push("/add-home-listing")}
                     >
                       Add Home Listing
-                    </Link>
+                    </button>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link
-                      href={"/add-land-listing"}
-                      className={`hover:text-primary font-medium text-base ${
+                    <button
+                      className={`hover:text-primary text-base ${
                         path == "/add-land-listing" &&
-                        "text-primary font-extrabold"
+                        "text-primary font-semibold"
                       }`}
+                      onClick={() => router.push("/add-land-listing")}
                     >
                       Add Land Listing
-                    </Link>
+                    </button>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link
-                      href={"/profile#/my-listing"}
-                      className={`hover:text-primary font-medium text-base ${
-                        path == "/listings" && "text-primary font-extrabold"
+                    <button
+                      className={`hover:text-primary text-base ${
+                        path == "/profile#/my-listing" &&
+                        "text-primary font-semibold"
                       }`}
+                      onClick={() => router.push("/profile#/my-listing")}
                     >
-                      My Listings
-                    </Link>
+                      My Listing
+                    </button>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className="text-red-700 text-base font-extrabold">
@@ -383,12 +396,14 @@ const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link
-                className={`border px-8 py-2 rounded-md bg-primary text-white`}
-                href="/sign-in"
+              <button
+                className={`hover:text-primary text-base text-primary/90 px-8 py-2 border mt-3 ${
+                  path == "/sign-in" && "text-primary font-semibold"
+                }`}
+                onClick={() => router.push("/sign-in")}
               >
                 Login
-              </Link>
+              </button>
             )}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -397,4 +412,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderAlt;

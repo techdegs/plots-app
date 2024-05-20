@@ -102,17 +102,17 @@ const Map = ({ parcels, center }) => {
     var contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4 flex flex-col">
-          <div class="font-bold text-lg mb-2">Plot Number ${text1}, ${text2}</div>
+          <div class="font-bold md:text-lg lg:text-lg text-sm mb-2">Plot Number ${text1}, ${text2}</div>
           <hr />
-          <a href="/nthc/buy-plot/${id}" class="border px-4 py-2 mt-3 rounded-md text-base font-normal">
+          <a href="/nthc/buy-plot/${id}" class="border px-4 py-1 mt-3 rounded-md text-sm font-normal">
             Buy Plot
           </a>
 
-          <a href="/nthc/reserve-plot/${id}" id="reserve_plot_button" class="border px-4 py-2 my-1 rounded-md text-base font-normal">
+          <a href="/nthc/reserve-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 my-2 rounded-md text-sm font-normal">
             Reserve Plot
           </a>
 
-          <a href="tel:0322008282" class="border px-4 py-2 rounded-md text-base font-normal">
+          <a href="tel:0322008282" class="border px-4 py-1 rounded-md text-sm font-normal">
             Call For Info
           </a>
         </div>
