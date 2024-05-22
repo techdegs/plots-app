@@ -5,23 +5,25 @@ import GoogleAddressSearch from "./GoogleAddressSearch";
 import { Button } from "@/components/ui/button";
 import FilterSesction from "./FilterSesction";
 import Link from "next/link";
+import LandFilterSection from "./LandFilterSection";
+import { useRouter } from "next/navigation";
 
-const Listing = ({
+const LandListing = ({
   listing,
   handleSearchClick,
   searchedAddress,
   searchedCoordinates,
   getSearchedResult,
 
-  setBathCount,
-  setBedCount,
-  setParkingCount,
-  setHomeType,
 
   showSA,
   setShowSA,
 }) => {
+
   const [address, setAddress] = useState();
+  const router = useRouter()
+
+
   return (
     <div>
       <div className="p-1 flex items-center gap-2 justify-between">
@@ -41,11 +43,8 @@ const Listing = ({
       </div>
 
       <div>
-        <FilterSesction
-          setBedCount={setBedCount}
-          setBathCount={setBathCount}
-          setParkingCount={setParkingCount}
-          setHomeType={setHomeType}
+        <LandFilterSection
+          // setHomeType={setHomeType}
         />
       </div>
 
@@ -69,12 +68,13 @@ const Listing = ({
                 key={index}
                 className="shadow-sm rounded p-2 hover:border hover:border-primary"
               >
-                <Link href={'/view-house-listing/'+item.id}>
+                <Link href={'/view-land-listing/'+item.id}>
                   <Image
                     className="object-cover h-[150px] rounded cursor-pointer"
-                    src={item.houseListingImages[0]?.url}
+                    src={item.landListingImages[0]?.url}
                     width={800}
                     height={150}
+                    alt="land listing image"
                   />
                 </Link>
                 <div className="flex flex-col gap-2 mt-3">
@@ -123,7 +123,7 @@ const Listing = ({
                   </div>
                 </div>
 
-                <Button className="w-full my-2 text-base cursor-pointer">
+                <Button className="w-full my-2 text-base cursor-pointer" onClick={() => router.push('/view-land-listing/' +item.id)}>
                   View Details
                 </Button>
               </div>
@@ -143,4 +143,4 @@ const Listing = ({
   );
 };
 
-export default Listing;
+export default LandListing;

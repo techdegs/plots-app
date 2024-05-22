@@ -12,8 +12,11 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
     lng: -1.6611130754452268,
   });
 
+  const [dbImages, setDbImages] = useState([])
+
   useEffect(() => {
     searchedCoordinates && setCenter(searchedCoordinates);
+    //setDbImages()
   }, [searchedCoordinates]);
 
   const [map, setMap] = useState(null);

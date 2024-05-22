@@ -48,7 +48,7 @@ const MarkerListingItem = ({ item, closeHandler, images }) => {
       {/* <div className="text-center my-2">
         <Link
           className="text-primary text-center text-lg border border-primary rounded-lg py-1 px-2"
-          href={"/view-listing/" + item.id}
+          href={"/view-house-listing/" + item.id}
         >
           View Details
         </Link>
