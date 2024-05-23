@@ -5,6 +5,7 @@ import GoogleAddressSearch from "./GoogleAddressSearch";
 import { Button } from "@/components/ui/button";
 import FilterSesction from "./FilterSesction";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Listing = ({
   listing,
@@ -22,6 +23,7 @@ const Listing = ({
   setShowSA,
 }) => {
   const [address, setAddress] = useState();
+  const router = useRouter()
   return (
     <div>
       <div className="p-1 flex items-center gap-2 justify-between">
@@ -123,7 +125,7 @@ const Listing = ({
                   </div>
                 </div>
 
-                <Button className="w-full my-2 text-base cursor-pointer">
+                <Button onClick={() => router.push('/view-house-listing/'+item.id)} className="w-full my-2 text-base cursor-pointer">
                   View Details
                 </Button>
               </div>

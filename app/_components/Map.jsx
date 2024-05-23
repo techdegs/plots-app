@@ -112,6 +112,10 @@ const Map = ({ parcels, center }) => {
             Reserve Plot
           </a>
 
+          <a href="/nthc/edit-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 mb-2 rounded-md text-sm font-normal">
+           Edit Plot
+          </a>
+
           <a href="tel:0322008282" class="border px-4 py-1 rounded-md text-sm font-normal">
             Call For Info
           </a>

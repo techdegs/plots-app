@@ -36,6 +36,7 @@
     "react-dom": "^18",
     "react-google-places-autocomplete": "^4.0.1",
     "react-places-autocomplete": "^7.3.0",
+    "react-toastify": "^10.0.5",
     "sharp": "^0.33.4",
     "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0",

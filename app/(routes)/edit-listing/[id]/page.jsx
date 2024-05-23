@@ -28,7 +28,7 @@ const EditListing = () => {
   const [images, setImages] = useState([]);
   const [houselisting, setHouseListing] = useState([]);
   const [dbImages, setDbImages] = useState([])
-  console.log(houselisting);
+
 
   useEffect(() => {
     user && verifyUserRecord();
