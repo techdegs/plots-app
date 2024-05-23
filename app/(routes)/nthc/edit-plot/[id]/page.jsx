@@ -212,18 +212,16 @@ const EditPlot = () => {
 
     if (data) {
       toast.success("Plot details updated successfully");
-      setLoader2(false)
+      setLoader2(false);
       setTimeout(() => {
         window.location.reload();
       }, 1500);
-      
     }
-    if(error){
-      console.log(error)
-      toast.error('Sorry errror happened updating the plot details')
-      setLoader2(false)
+    if (error) {
+      console.log(error);
+      toast.error("Sorry errror happened updating the plot details");
+      setLoader2(false);
     }
-
   };
 
   //Fetch Plot Details From DB
@@ -280,7 +278,6 @@ const EditPlot = () => {
       event.preventDefault();
     }
   };
-
 
   return (
     <>
@@ -1454,6 +1451,7 @@ const EditPlot = () => {
               )}
 
               {/* Step 2 */}
+
             </form>
           </div>
         </div>

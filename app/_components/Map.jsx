@@ -4,22 +4,31 @@ import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
 import mapboxgl from "mapbox-gl";
 import { usePathname } from "next/navigation";
 
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const Map = ({ parcels, center }) => {
   const [map, setMap] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [plotID, setPlotID] = useState()
   const path = usePathname();
 
   const mapContainerStyle = {
     height: "75vh",
     width: "85%",
   };
-
-  // const center = {
-  //   lng: -1.5007916502847063,
-  //   lat: 6.759657505706267,
-  // };
 
   const zoom = 17;
 
@@ -80,7 +89,7 @@ const Map = ({ parcels, center }) => {
     });
     var centroid = bounds.getCenter();
 
-    // Add a label at the centroid
+    // Add a label at the center
     var label = new google.maps.Marker({
       position: centroid,
       icon: {
@@ -98,9 +107,15 @@ const Map = ({ parcels, center }) => {
     });
   };
 
+
+  const onClose = () => {
+    setModalOpen(true);
+  };
+
   //Add Content
   var openInfoWindow = null;
-  const handleInfo = (coordinates, text1, text2, index, id) => {
+  const handleInfo = (coordinates, text1, text2, id) => {
+    setPlotID(id)
     var contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4 flex flex-col">
@@ -121,6 +136,8 @@ const Map = ({ parcels, center }) => {
           <a href="tel:0322008282" class="border px-4 py-1 rounded-md text-sm font-normal">
             Call For Info
           </a>
+
+          <button class="bg-primary w-full py-2 mt-3 text-white" id="changePlotID">Change Plot Price</button>
         </div>
       </div>
     `;
@@ -152,6 +169,14 @@ const Map = ({ parcels, center }) => {
 
     // Update the global variable with the newly opened info window
     openInfoWindow = infoWindow;
+    google.maps.event.addListener(infoWindow, "domready", function () {
+      document
+        .getElementById("changePlotID")
+        .addEventListener("click", function () {
+          setModalOpen(true)
+          //console.log(plotID);
+        });
+    });
   };
 
   function getColorBasedOnStatus(status) {
@@ -180,6 +205,55 @@ const Map = ({ parcels, center }) => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
+      {modalOpen && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded shadow-lg">
+            <button
+              className="absolute top-2 right-2 text-gray-700"
+              onClick={onClose}
+            >
+              &times;
+            </button>
+            <p>Here we go</p>
+          </div>
+        </div>
+      )}
+      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+        <DialogTrigger asChild></DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Change Plot Price</DialogTitle>
+            <DialogDescription>
+              Make chages to price, subsequently changing the related client payments
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
+                Old Price
+              </Label>
+              <Input
+                id="name"
+                className="col-span-3"
+                type="number"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="newprice" className="text-right">
+                New Price
+              </Label>
+              <Input
+                id="newprice"
+                className="col-span-3"
+                type="number"
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button onClick={() => console.log(plotID)} type="button">Save changes</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
@@ -198,13 +272,15 @@ const Map = ({ parcels, center }) => {
                 strokeWeight: 1,
               }}
               onClick={() =>
-                handleInfo(
-                  feature.geometry?.coordinates[0],
-                  feature.properties?.Plot_No,
-                  feature.properties?.Street_Nam,
-                  index,
-                  feature.id
-                )
+                {
+                  handleInfo(
+                    feature.geometry?.coordinates[0],
+                    feature.properties?.Plot_No,
+                    feature.properties?.Street_Nam,
+                    feature.id
+                  );
+                  setPlotID(feature.id)
+                }
               }
             />
 
