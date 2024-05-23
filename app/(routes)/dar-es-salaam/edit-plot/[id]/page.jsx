@@ -74,7 +74,7 @@ const EditPlot = () => {
     if (id) {
       fechPlotData();
     } else {
-      router.push("/nthc");
+      router.push("/dar-es-salaam");
     }
   }, []);
 
@@ -192,7 +192,7 @@ const EditPlot = () => {
     //Update plot details with plotData on Supabase
     setLoader2(true);
     const { data, error } = await supabase
-      .from("nthc")
+      .from("dar_es_salaam")
       .update({
         status: plotData.status,
         firstname: plotData.firstname,
@@ -229,7 +229,7 @@ const EditPlot = () => {
   //Fetch Plot Details From DB
   const fechPlotData = async () => {
     const { data, error } = await supabase
-      .from("nthc")
+      .from("dar_es_salaam")
       .select("*")
       .eq("id", id);
 
@@ -251,12 +251,12 @@ const EditPlot = () => {
       });
     } else {
       toast("Something went wrong fetching plot data");
-      router.replace("/nthc");
+      router.push("/dar-es-salaam");
     }
     if (error) {
       console.log(error);
       toast("Something went wrong fetching plot data");
-      router.push("/nthc");
+      router.push("/dar-es-salaam");
     }
   };
 

@@ -2,12 +2,14 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { GoogleMap, Polygon, useJsApiLoader } from "@react-google-maps/api";
 import mapboxgl from "mapbox-gl";
-import { parcels } from "@/dar-es-salaam/plotDetails";
+import { usePathname } from "next/navigation";
+
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const Map = ({ parcels, center }) => {
   const [map, setMap] = useState(null);
+  const path = usePathname();
 
   const mapContainerStyle = {
     height: "75vh",
@@ -64,7 +66,7 @@ const Map = ({ parcels, center }) => {
   };
 
   //Add Marker inside Polygon
-  const markerInfo = (coordinates, text) => {
+  const markerInfo = (coordinates, text, status) => {
     const polygonCoords = [];
     for (const coord of coordinates) {
       const [lng, lat] = coord;
@@ -87,7 +89,7 @@ const Map = ({ parcels, center }) => {
       },
       label: {
         text: text.toString(),
-        color: "#000000",
+        color: renderMarkerColor(status),
         fontSize: "11px",
         //fontWeight: "bold",
         scale: 0,
@@ -104,15 +106,15 @@ const Map = ({ parcels, center }) => {
         <div class="px-6 py-4 flex flex-col">
           <div class="font-bold md:text-lg lg:text-lg text-sm mb-2">Plot Number ${text1}, ${text2}</div>
           <hr />
-          <a href="/nthc/buy-plot/${id}" class="border px-4 py-1 mt-3 rounded-md text-sm font-normal">
+          <a href="${path}/buy-plot/${id}" class="border px-4 py-1 mt-3 rounded-md text-sm font-normal">
             Buy Plot
           </a>
 
-          <a href="/nthc/reserve-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 my-2 rounded-md text-sm font-normal">
+          <a href="${path}/reserve-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 my-2 rounded-md text-sm font-normal">
             Reserve Plot
           </a>
 
-          <a href="/nthc/edit-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 mb-2 rounded-md text-sm font-normal">
+          <a href="${path}/edit-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 mb-2 rounded-md text-sm font-normal">
            Edit Plot
           </a>
 
@@ -152,6 +154,30 @@ const Map = ({ parcels, center }) => {
     openInfoWindow = infoWindow;
   };
 
+  function getColorBasedOnStatus(status) {
+    if (status === null || status === "Available" || status === undefined) {
+      return "green";
+    } else if (status === "Reserved") {
+      return "black";
+    } else if (status === "Sold") {
+      return "red";
+    } else {
+      return "orange"; // Optional: handle unexpected status values
+    }
+  }
+
+  function renderMarkerColor(status) {
+    if (status === null || status === "Available" || status === undefined) {
+      return "black";
+    } else if (status === "Reserved") {
+      return "white";
+    } else if (status === "Sold") {
+      return "black";
+    } else {
+      return "orange"; // Optional: handle unexpected status values
+    }
+  }
+
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <GoogleMap
@@ -167,7 +193,7 @@ const Map = ({ parcels, center }) => {
               key={index}
               path={asCoordinates(feature.geometry?.coordinates[0])}
               options={{
-                fillColor: "red",
+                fillColor: getColorBasedOnStatus(feature.status),
                 fillOpacity: 0.8,
                 strokeWeight: 1,
               }}
@@ -184,7 +210,8 @@ const Map = ({ parcels, center }) => {
 
             {markerInfo(
               feature.geometry.coordinates[0],
-              feature.properties.Plot_No
+              feature.properties.Plot_No,
+              feature.status
             )}
           </>
         ))}
@@ -192,9 +219,5 @@ const Map = ({ parcels, center }) => {
     </div>
   );
 };
-
-function buyPlotClicked() {
-  console.log("Buy Plot button clicked");
-}
 
 export default Map;
