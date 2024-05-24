@@ -16,6 +16,10 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/utils/supabase/client";
+import { toast } from "react-toastify";
+import { toast as tToast } from "sonner";
+import { Loader } from "lucide-react";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -24,6 +28,10 @@ const Map = ({ parcels, center }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [plotID, setPlotID] = useState();
   const path = usePathname();
+  const [newPrice, setNewPrice] = useState("");
+  const [newPriceEr, setNewPriceEr] = useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   const mapContainerStyle = {
     height: "75vh",
@@ -109,12 +117,14 @@ const Map = ({ parcels, center }) => {
 
   const onClose = () => {
     setModalOpen(true);
+    if (openInfoWindow) {
+      openInfoWindow.close();
+    }
   };
-
 
   //Add info Window
   var openInfoWindow = null;
-  const handleInfo = (coordinates, text1, text2, id) => {
+  const handleInfo = (coordinates, text1, text2, id, amount) => {
     const contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4 flex flex-col">
@@ -136,7 +146,7 @@ const Map = ({ parcels, center }) => {
             Call For Info
           </a>
 
-          <button data-id=${id} class="bg-primary w-full py-2 mt-3 text-white" id="changePlotID">Change Plot Price</button>
+          <button id="changePlotID" data-id=${id}  data-text="${text1}, ${text2}" amount="${amount}" class="bg-primary w-full py-2 mt-3 text-white" id="changePlotID">Change Plot Price</button>
         </div>
       </div>
     `;
@@ -161,14 +171,44 @@ const Map = ({ parcels, center }) => {
     });
 
     infoWindow.setContent(contentString);
+    infoWindow.open(map);
 
     google.maps.event.addListener(infoWindow, "domready", () => {
-      document.getElementById("changePlotID").addEventListener("click", () => {
+      const Btn = document.getElementById("changePlotID");
+      Btn.addEventListener("click", () => {
+        const content = Btn.getAttribute("data-text");
+        const id = Btn.getAttribute("data-id");
+        const amountStr = Btn.getAttribute("amount");
+
         setModalOpen(true);
+
+        setTimeout(function () {
+          document.getElementById(
+            "description"
+          ).innerHTML = `Plot number ${content}`;
+
+          let amount;
+          if (amountStr === null || amountStr === "") {
+            amount = null;
+          } else {
+            amount = parseFloat(amountStr);
+          }
+
+          if (amount === null || isNaN(amount)) {
+            document.getElementById("old-price").innerHTML = "GHS. 0.00";
+          } else {
+            document.getElementById("old-price").innerHTML =
+              "GHS. " + amount.toLocaleString();
+          }
+
+          setPlotID(id);
+        }, 1000);
+
+        if (openInfoWindow) {
+          openInfoWindow.close();
+        }
       });
     });
-
-    infoWindow.open(map);
 
     openInfoWindow = infoWindow;
   };
@@ -197,6 +237,118 @@ const Map = ({ parcels, center }) => {
     }
   }
 
+  const hanldeSaveNewPrice = async () => {
+    setLoading(true)
+    let newPrice = document.getElementById("newPrice").value;
+    let newAmount;
+    if (newPrice === undefined || newPrice === "" || newPrice === null) {
+      toast.error("Check the new Price");
+      setNewPriceEr(true); setLoading(false);
+      return;
+    } else {
+      newAmount = parseFloat(newPrice);
+
+      if (isNaN(newAmount) || newAmount <= 0) {
+        toast.error("Check the new Price");
+        setNewPriceEr(true);
+        setLoading(false);
+        return;
+      } else {
+        setNewPriceEr(false);
+        setLoading(false);
+        console.log(newAmount);
+      }
+    }
+
+    let database;
+    //console.log(plotID)
+    if (path === "/nthc") {
+      database = "nthc";
+    }
+    if (path === "/dar-es-salaam") {
+      database = "dar_es_salaam";
+    }
+
+    let plotTotalAmount;
+    let paidAmount;
+    let remainingAmount;
+    try {
+      // Await the response from Supabase
+      const response = await supabase
+        .from(database)
+        .select("plotTotalAmount, paidAmount, remainingAmount, id")
+        .eq("id", plotID);
+
+      // Destructure the response to get data and error
+      const { data, error } = response;
+
+      // Check if there's an error
+      if (error) {
+        setLoading(false);
+        setModalOpen(false);
+        console.error("Error fetching data:", error);
+        toast.error("Sorry Error occured updating the plot price")
+        return; // Exit the function if there's an error
+      }
+
+      // Ensure data exists and is in the expected format
+      if (data && data.length > 0) {
+        plotTotalAmount = data[0].plotTotalAmount;
+        paidAmount = data[0].paidAmount;
+        remainingAmount = data[0].remainingAmount;
+
+        if (plotTotalAmount === null || plotTotalAmount === undefined) {
+          plotTotalAmount = 0;
+        }
+        if (paidAmount === null || paidAmount === undefined) {
+          paidAmount = 0;
+        }
+        if (remainingAmount === null || remainingAmount === undefined) {
+          remainingAmount = 0;
+        }
+
+        remainingAmount = newAmount - paidAmount;
+      } else {
+        setLoading(false);
+        setModalOpen(false);
+        console.log("No data found for the given plot ID.");
+      }
+    } catch (error) {
+      setLoading(false);
+      setModalOpen(false);
+      console.error("Unexpected error:", err);
+    }
+
+    saveInfo(remainingAmount, newAmount, paidAmount, database);
+
+
+  };
+
+  const saveInfo = async (remainingAmount, newAmount, paidAmount, database) => {
+    const { data, error } = await supabase
+      .from(database)
+      .update({
+        plotTotalAmount: newAmount,
+        remainingAmount: remainingAmount,
+        paidAmount: paidAmount,
+      })
+      .eq("id", plotID)
+      .select();
+
+    if (data) {
+      console.log(data);
+      tToast("Plot Price updated successfully");
+      setLoading(false);
+      setModalOpen(false);
+      window.location.reload();
+      
+    }
+    if (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center justify-center">
       {modalOpen && (
@@ -212,38 +364,50 @@ const Map = ({ parcels, center }) => {
           </div>
         </div>
       )}
-      <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogTrigger asChild></DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Change Plot Price</DialogTitle>
-            <DialogDescription>
-              Make chages to price, subsequently changing the related client
-              payments
-            </DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Old Price
-              </Label>
-              <Input id="name" className="col-span-3" type="number" />
+      <form>
+        <Dialog open={modalOpen} onOpenChange={setModalOpen}>
+          <DialogTrigger asChild></DialogTrigger>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+              <DialogTitle>Change Plot Price</DialogTitle>
+              <DialogDescription className="flex items-center gap-4 text-gray-800 text-sm">
+                <span className="font-semibold text-sm">Plot Details: </span>
+                <p className=" text-sm" id="description"></p>
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div className="flex items-center gap-4 font-medium">
+                <Label htmlFor="name" className="text-right">
+                  Old Price:
+                </Label>
+                <p id="old-price" className="text-base text-gray-800"></p>
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="newprice" className="text-right">
+                  New Price (GHS.)
+                </Label>
+                <Input
+                  className="col-span-3"
+                  type="number"
+                  id="newPrice"
+                  style={{ border: newPriceEr && "1px solid red" }}
+                />
+              </div>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="newprice" className="text-right">
-                New Price
-              </Label>
-              <Input id="newprice" className="col-span-3" type="number" />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button onClick={() => console.log(plotID)} type="button">
-              Save changes
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
+            <DialogFooter>
+              <Button onClick={hanldeSaveNewPrice} type="button">
+                {
+                  loading ? (
+                    <Loader className="animate-spin" />
+                  ): (
+                    "Save changes"
+                  )
+                }
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </form>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
@@ -261,12 +425,13 @@ const Map = ({ parcels, center }) => {
                 fillOpacity: 0.8,
                 strokeWeight: 1,
               }}
-              onClick={() => 
+              onClick={() =>
                 handleInfo(
                   feature.geometry?.coordinates[0],
                   feature.properties?.Plot_No,
                   feature.properties?.Street_Nam,
-                  feature.id
+                  feature.id,
+                  feature.plotTotalAmount
                 )
               }
             />
