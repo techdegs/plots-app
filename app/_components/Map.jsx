@@ -22,7 +22,7 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 const Map = ({ parcels, center }) => {
   const [map, setMap] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [plotID, setPlotID] = useState()
+  const [plotID, setPlotID] = useState();
   const path = usePathname();
 
   const mapContainerStyle = {
@@ -107,16 +107,15 @@ const Map = ({ parcels, center }) => {
     });
   };
 
-
   const onClose = () => {
     setModalOpen(true);
   };
 
-  //Add Content
+
+  //Add info Window
   var openInfoWindow = null;
   const handleInfo = (coordinates, text1, text2, id) => {
-    setPlotID(id)
-    var contentString = `
+    const contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4 flex flex-col">
           <div class="font-bold md:text-lg lg:text-lg text-sm mb-2">Plot Number ${text1}, ${text2}</div>
@@ -129,54 +128,49 @@ const Map = ({ parcels, center }) => {
             Reserve Plot
           </a>
 
-          <a href="${path}/edit-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 mb-2 rounded-md text-sm font-normal">
-           Edit Plot
+          <a href="${path}/edit-plot/${id}" id="edit_plot_button" class="border px-4 py-1 mb-2 rounded-md text-sm font-normal">
+            Edit Plot
           </a>
 
           <a href="tel:0322008282" class="border px-4 py-1 rounded-md text-sm font-normal">
             Call For Info
           </a>
 
-          <button class="bg-primary w-full py-2 mt-3 text-white" id="changePlotID">Change Plot Price</button>
+          <button data-id=${id} class="bg-primary w-full py-2 mt-3 text-white" id="changePlotID">Change Plot Price</button>
         </div>
       </div>
     `;
 
-    const polygonCoords = [];
-    for (const coord of coordinates) {
-      const [lng, lat] = coord;
-      polygonCoords.push({ lng, lat });
-    }
+    const polygonCoords = coordinates.map((coord) => ({
+      lng: coord[0],
+      lat: coord[1],
+    }));
 
     // Calculate the centroid of the polygon
-    var bounds = new google.maps.LatLngBounds();
-    polygonCoords.forEach(function (coord) {
-      bounds.extend(coord);
-    });
-    var centroid = bounds.getCenter();
+    const bounds = new google.maps.LatLngBounds();
+    polygonCoords.forEach((coord) => bounds.extend(coord));
+    const centroid = bounds.getCenter();
 
-    // Close the previously open info window, if any
     if (openInfoWindow) {
       openInfoWindow.close();
     }
 
-    var infoWindow = new google.maps.InfoWindow({
+    // Create a new info window
+    const infoWindow = new google.maps.InfoWindow({
       position: centroid,
     });
 
     infoWindow.setContent(contentString);
+
+    google.maps.event.addListener(infoWindow, "domready", () => {
+      document.getElementById("changePlotID").addEventListener("click", () => {
+        setModalOpen(true);
+      });
+    });
+
     infoWindow.open(map);
 
-    // Update the global variable with the newly opened info window
     openInfoWindow = infoWindow;
-    google.maps.event.addListener(infoWindow, "domready", function () {
-      document
-        .getElementById("changePlotID")
-        .addEventListener("click", function () {
-          setModalOpen(true)
-          //console.log(plotID);
-        });
-    });
   };
 
   function getColorBasedOnStatus(status) {
@@ -224,7 +218,8 @@ const Map = ({ parcels, center }) => {
           <DialogHeader>
             <DialogTitle>Change Plot Price</DialogTitle>
             <DialogDescription>
-              Make chages to price, subsequently changing the related client payments
+              Make chages to price, subsequently changing the related client
+              payments
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">
@@ -232,28 +227,23 @@ const Map = ({ parcels, center }) => {
               <Label htmlFor="name" className="text-right">
                 Old Price
               </Label>
-              <Input
-                id="name"
-                className="col-span-3"
-                type="number"
-              />
+              <Input id="name" className="col-span-3" type="number" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="newprice" className="text-right">
                 New Price
               </Label>
-              <Input
-                id="newprice"
-                className="col-span-3"
-                type="number"
-              />
+              <Input id="newprice" className="col-span-3" type="number" />
             </div>
           </div>
           <DialogFooter>
-            <Button onClick={() => console.log(plotID)} type="button">Save changes</Button>
+            <Button onClick={() => console.log(plotID)} type="button">
+              Save changes
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         center={center}
@@ -271,16 +261,13 @@ const Map = ({ parcels, center }) => {
                 fillOpacity: 0.8,
                 strokeWeight: 1,
               }}
-              onClick={() =>
-                {
-                  handleInfo(
-                    feature.geometry?.coordinates[0],
-                    feature.properties?.Plot_No,
-                    feature.properties?.Street_Nam,
-                    feature.id
-                  );
-                  setPlotID(feature.id)
-                }
+              onClick={() => 
+                handleInfo(
+                  feature.geometry?.coordinates[0],
+                  feature.properties?.Plot_No,
+                  feature.properties?.Street_Nam,
+                  feature.id
+                )
               }
             />
 

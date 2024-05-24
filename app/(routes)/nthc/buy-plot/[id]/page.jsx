@@ -75,6 +75,8 @@ const EditPlot = () => {
     }
   }, []);
 
+console.log(plotData)
+
   const handleStep1 = (e) => {
     e.preventDefault();
 
@@ -216,6 +218,7 @@ const EditPlot = () => {
         remainingAmount: data[0].remainingAmount,
         remarks: data[0].remarks,
         plotStatus: data[0].status,
+        status: data[0].status
       });
     } else {
       toast("Something went wrong fetching plot data");
@@ -249,23 +252,29 @@ const EditPlot = () => {
     }
   };
 
+  let plotAmount = 0;
+  const checkPlotAmount = () => {
+    plotAmount = plotData.plotTotalAmount ? plotData.plotTotalAmount *100 : 65000*100
+    return plotAmount
+  }
+
   //PayStack Component Props
   const componentProps = {
     publicKey:publicKey,
-    email:'asamuel355@gmail.com',
-    amount: 60000*100,
+    email: plotData.email,
+    amount: plotAmount,
     currency:'GHS',
     metadata: {
-      firstname,
-      lastname,
-      country,
-      phone,
-      residentialAddress,
-      agent,
+      firstname: plotData.firstname,
+      lastname: plotData.lastname,
+      country: plotData.country,
+      phone: plotData.phone,
+      residentialAddress: plotData.residentialAddress,
+      agent: plotData.agent,
     },
     className: "bg-primary text-white py-2 px-4 rounded-md shadow-md",
 
-    text: `Pay GHS. ${60000}`,
+    text: `Pay GHS. ${(plotAmount/100).toLocaleString()}`,
 
     onSuccess: (response) => {
       console.log(response);
@@ -1441,6 +1450,7 @@ const EditPlot = () => {
                       <Loader className="animate-spin" />
                     ) : (
                       <PaystackButton {...componentProps} />
+                     
                     )}
                   </div>
                 </div>
