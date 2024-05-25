@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Provider from "./Provider";
 import { Toaster } from "@/components/ui/sonner";
-import Footer from "./_components/Footer";
 import ToastMessage from "./_components/ToastMessage";
+import { Suspense } from "react";
 
 //const inter = Inter({ subsets: ["outfit"] });
 

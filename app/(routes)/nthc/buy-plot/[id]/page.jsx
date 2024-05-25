@@ -30,6 +30,7 @@ const EditPlot = () => {
   const [loader1, setLoader1] = useState(false);
   const [loader2, setLoader2] = useState(false);
   const [loader3, setLoader3] = useState(false);
+  const [verifyLoading, setVerifyLoading] = useState(false);
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(false);
   const [step3, setStep3] = useState(false);
@@ -75,17 +76,28 @@ const EditPlot = () => {
     }
   }, []);
 
-console.log(plotData)
-
   const handleStep1 = (e) => {
     e.preventDefault();
+
+    if (
+      plotTotalAmount === null ||
+      plotTotalAmount === undefined ||
+      plotTotalAmount === 0 ||
+      plotTotalAmount === ""
+    ) {
+      setPlotTotalAmountEr(true);
+      toast.error("The plot amount is not set. Contact the admin: 0322008282");
+      return;
+    } else {
+      setPlotTotalAmountEr(false);
+    }
 
     setStep1(false);
     setStep2(true);
   };
 
   const handlePrev = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     setStep1(true);
     setStep2(false);
   };
@@ -159,41 +171,7 @@ console.log(plotData)
     }
 
     setStep3(true);
-    setStep2(false)
-    
-    //Update plot details with plotData on Supabase
-
-    // const { data, error } = await supabase
-    //   .from("nthc")
-    //   .update({
-    //     status: plotData.status,
-    //     firstname: plotData.firstname,
-    //     lastname: plotData.lastname,
-    //     email: plotData.email,
-    //     country: plotData.country,
-    //     phone: plotData.phone,
-    //     residentialAddress: plotData.residentialAddress,
-    //     agent: plotData.agent,
-    //     plotTotalAmount: plotData.plotTotalAmount,
-    //     paidAmount: plotData.paidAmount,
-    //     remainingAmount: plotData.remainingAmount,
-    //     remarks: plotData.remarks,
-    //   })
-    //   .eq("id", id)
-    //   .select();
-
-    // if (data) {
-    //   toast.success("Plot details updated successfully");
-    //   setLoader2(false);
-    //   setTimeout(() => {
-    //     window.location.reload();
-    //   }, 1500);
-    // }
-    // if (error) {
-    //   console.log(error);
-    //   toast.error("Sorry errror happened updating the plot details");
-    //   setLoader2(false);
-    // }
+    setStep2(false);
   };
 
   //Fetch Plot Details From DB
@@ -218,7 +196,7 @@ console.log(plotData)
         remainingAmount: data[0].remainingAmount,
         remarks: data[0].remarks,
         plotStatus: data[0].status,
-        status: data[0].status
+        status: data[0].status,
       });
     } else {
       toast("Something went wrong fetching plot data");
@@ -252,21 +230,16 @@ console.log(plotData)
     }
   };
 
-  let plotAmount = 0;
-  const checkPlotAmount = () => {
-    plotAmount = plotData.plotTotalAmount ? plotData.plotTotalAmount *100 : 65000*100
-    return plotAmount
-  }
-
   //PayStack Component Props
   const componentProps = {
-    publicKey:publicKey,
+    publicKey: publicKey,
     email: plotData.email,
-    amount: plotAmount,
-    currency:'GHS',
+    currency: "GHS",
+    amount: plotTotalAmount * 100,
     metadata: {
       firstname: plotData.firstname,
       lastname: plotData.lastname,
+      email: email,
       country: plotData.country,
       phone: plotData.phone,
       residentialAddress: plotData.residentialAddress,
@@ -274,15 +247,100 @@ console.log(plotData)
     },
     className: "bg-primary text-white py-2 px-4 rounded-md shadow-md",
 
-    text: `Pay GHS. ${(plotAmount/100).toLocaleString()}`,
+    text:
+      plotTotalAmount !== null && plotTotalAmount !== undefined
+        ? `Pay GHS. ${plotTotalAmount.toLocaleString()} `
+        : "Pay GHS. 0.00",
 
     onSuccess: (response) => {
-      console.log(response);
-      alert("Thanks for doing business with us! Come back soon!!");
+      if (response.status === "success") {
+        setVerifyLoading(true)
+        toast.success("Thank you! your payment was made");
+        verifyTransaction(response.reference);
+      }
     },
     onClose: () => alert("Closing will make the transaction unsuccessfull"),
-    callback: (response)=>{
-      console.log('callback: ', response)
+  };
+
+  const verifyTransaction = async (reference) => {
+    const secretKey = process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY;
+
+    try {
+      const url = `https://api.paystack.co/transaction/verify/${reference}`;
+      const authorization = `Bearer ${secretKey}`;
+
+      fetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: authorization,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (
+            data.status === true &&
+            data.message === "Verification successful"
+          ) {
+            //Send details to email and update plot details and redirect to thank you page
+            //console.log(JSON.stringify(data.data));
+            const paymentData = JSON.stringify(data.data);
+            const amount = data.data.amount / 100;
+            // json.parse(data.data)
+
+            //Update plot details with plotData on Supabase
+            savePaymentDetails(paymentData, amount, data)
+          } else {
+            toast.error("Your Transaction verification was not successfull");
+            router.push("/nthc/payment/error");
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "There was a problem with your fetch operation:",
+            error
+          );
+          toast.error("Your Transaction verification was not successfull");
+        });
+    } catch (error) {
+      console.error("Error verifying transaction:", error);
+      toast.error("Your Transaction verification was not successfull");
+    }
+  };
+
+  const savePaymentDetails = async (paymentData, amount, data) => {
+    const { data:dbData, error } = await supabase
+      .from("nthc")
+      .update({
+        firstname: data.data.metadata.firstname,
+        lastname: data.data.metadata.lastname,
+        email: data.data.metadata.email,
+        country: data.data.metadata.country,
+        phone: data.data.metadata.phone,
+        residentialAddress: data.data.metadata.residentialAddress,
+        agent: data.data.metadata.agent,
+        paidAmount: amount,
+        remainingAmount: 0,
+        remarks: data.data.metadata.remarks,
+        paymentDetails: paymentData,
+        paymentId: data.data.id,
+        paymentReference: data.data.reference,
+        status: 'Sold'
+      })
+      .eq("id", id)
+      .select();
+
+    if (dbData) {
+      setVerifyLoading(false)
+      toast.success("Transaction verified successfully");
+      router.push('/nthc/payment/success')
+    }
+    if (error) {
+      console.log(error);
     }
   };
 
@@ -290,9 +348,7 @@ console.log(plotData)
     <>
       {allDetails && (
         <div className="w-full px-10 md:px-16 lg:px-48 xl:px-48">
-          <h2 className="font-bold text-2xl text-center mb-5">
-            Edit Plot Details
-          </h2>
+          <h2 className="font-bold text-2xl text-center mb-5">Plot Details</h2>
 
           <div className="shadow-md border rounded-sm mt-8">
             <form onSubmit={handleFormSubmit}>
@@ -338,20 +394,21 @@ console.log(plotData)
 
                     <div className="flex gap-2 flex-col">
                       <h2 className="text-gray-900 font-semibold">
-                        Total Plot Amount
+                        Plot Amount (GHS)
                       </h2>
                       <Input
                         name="plotTotalAmount"
                         type="number"
                         onChange={onInputChange}
-                        value={650000}
+                        disabled
+                        value={plotTotalAmount}
                         onKeyPress={handleInput}
                         onKeyUp={handleCalculateAmount}
                         style={{ border: plotTotalAmountEr && `1px solid red` }}
                       />
                       {plotTotalAmountEr && (
                         <small className="text-red-900">
-                          Enter Plot amount
+                          Action needed by Admin
                         </small>
                       )}
                     </div>
@@ -1443,14 +1500,17 @@ console.log(plotData)
                       onClick={handlePrevLast}
                       className="bg-white text-primary py-2 px-4 rounded-md shadow-md border"
                     >
-                      {loader1 ? <Loader className="animate-spin" /> : "Previous"}
+                      {loader1 ? (
+                        <Loader className="animate-spin" />
+                      ) : (
+                        "Previous"
+                      )}
                     </button>
 
                     {loader3 ? (
                       <Loader className="animate-spin" />
                     ) : (
                       <PaystackButton {...componentProps} />
-                     
                     )}
                   </div>
                 </div>

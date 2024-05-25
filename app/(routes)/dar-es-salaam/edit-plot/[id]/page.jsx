@@ -192,7 +192,7 @@ const EditPlot = () => {
     //Update plot details with plotData on Supabase
     setLoader2(true);
     const { data, error } = await supabase
-      .from("dar_es_salaam")
+      .from("dar-es-salaam")
       .update({
         status: plotData.status,
         firstname: plotData.firstname,
@@ -212,18 +212,16 @@ const EditPlot = () => {
 
     if (data) {
       toast.success("Plot details updated successfully");
-      setLoader2(false)
+      setLoader2(false);
       setTimeout(() => {
         window.location.reload();
       }, 1500);
-      
     }
-    if(error){
-      console.log(error)
-      toast.error('Sorry errror happened updating the plot details')
-      setLoader2(false)
+    if (error) {
+      console.log(error);
+      toast.error("Sorry errror happened updating the plot details");
+      setLoader2(false);
     }
-
   };
 
   //Fetch Plot Details From DB
@@ -251,7 +249,7 @@ const EditPlot = () => {
       });
     } else {
       toast("Something went wrong fetching plot data");
-      router.push("/dar-es-salaam");
+      router.replace("/dar-es-salaam");
     }
     if (error) {
       console.log(error);
@@ -280,7 +278,6 @@ const EditPlot = () => {
       event.preventDefault();
     }
   };
-
 
   return (
     <>
@@ -1454,6 +1451,7 @@ const EditPlot = () => {
               )}
 
               {/* Step 2 */}
+
             </form>
           </div>
         </div>

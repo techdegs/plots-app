@@ -5,7 +5,8 @@ import Hero from '@/app/_components/Hero'
 import HomeFilters from '@/app/_components/HomeFilters'
 import Invests from '@/app/_components/Invests'
 import Speciality from '@/app/_components/Specialty'
-import React from 'react'
+import React, { Suspense } from 'react'
+
 
 const Home = () => {
   return (

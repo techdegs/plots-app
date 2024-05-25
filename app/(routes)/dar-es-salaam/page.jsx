@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 const page = () => {
   const [plots, setPlots] = useState([]);
   const [center, setCenter] = useState({
-    lng: -1.4988789106214604,
-    lat: 6.758705597488173,
+    lng: -1.6633491209999534,
+    lat: 6.6715352750000534,
   });
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const page = () => {
     <>
       <div className="w-full mx-12 overflow-x-hidden mb-8">
         <h1 className="font-bold text-lg my-4 text-center capitalize">
-          DAR ES SALAAM
+          DAR-ES-SALAAM SITE
         </h1>
         <Map geoJsonData={plots} parcels={plots} center={center} />
       </div>

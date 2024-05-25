@@ -124,17 +124,17 @@ const Map = ({ parcels, center }) => {
 
   //Add info Window
   var openInfoWindow = null;
-  const handleInfo = (coordinates, text1, text2, id, amount) => {
+  const handleInfo = (coordinates, text1, text2, id, amount, status) => {
     const contentString = `
       <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4 flex flex-col">
           <div class="font-bold md:text-lg lg:text-lg text-sm mb-2">Plot Number ${text1}, ${text2}</div>
           <hr />
-          <a href="${path}/buy-plot/${id}" class="border px-4 py-1 mt-3 rounded-md text-sm font-normal">
+          <a style="display: ${status === 'Sold'? 'none': 'block'}"  href="${path}/buy-plot/${id}" class="border px-4 py-1 mt-3 mb-1 rounded-md text-sm font-normal">
             Buy Plot
           </a>
 
-          <a href="${path}/reserve-plot/${id}" id="reserve_plot_button" class="border px-4 py-1 my-2 rounded-md text-sm font-normal">
+          <a style="display: ${status === 'Reserved'? 'none': 'block'}" href="${path}/reserve-plot/${id}" id="reserve_plot_button" class="border mb-1 px-4 py-1 my-2 rounded-md text-sm font-normal">
             Reserve Plot
           </a>
 
@@ -431,7 +431,8 @@ const Map = ({ parcels, center }) => {
                   feature.properties?.Plot_No,
                   feature.properties?.Street_Nam,
                   feature.id,
-                  feature.plotTotalAmount
+                  feature.plotTotalAmount,
+                  feature.status
                 )
               }
             />
