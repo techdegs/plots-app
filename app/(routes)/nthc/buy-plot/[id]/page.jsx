@@ -254,7 +254,7 @@ const EditPlot = () => {
 
     onSuccess: (response) => {
       if (response.status === "success") {
-        setVerifyLoading(true)
+        setVerifyLoading(true);
         toast.success("Thank you! your payment was made");
         verifyTransaction(response.reference);
       }
@@ -293,7 +293,7 @@ const EditPlot = () => {
             // json.parse(data.data)
 
             //Update plot details with plotData on Supabase
-            savePaymentDetails(paymentData, amount, data)
+            savePaymentDetails(paymentData, amount, data);
           } else {
             toast.error("Your Transaction verification was not successfull");
             router.push("/nthc/payment/error");
@@ -313,7 +313,7 @@ const EditPlot = () => {
   };
 
   const savePaymentDetails = async (paymentData, amount, data) => {
-    const { data:dbData, error } = await supabase
+    const { data: dbData, error } = await supabase
       .from("nthc")
       .update({
         firstname: data.data.metadata.firstname,
@@ -329,15 +329,35 @@ const EditPlot = () => {
         paymentDetails: paymentData,
         paymentId: data.data.id,
         paymentReference: data.data.reference,
-        status: 'Sold'
+        status: "Sold",
       })
       .eq("id", id)
       .select();
 
     if (dbData) {
-      setVerifyLoading(false)
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: data.data.metadata.email,
+          firstname: data.data.metadata.firstname,
+          lastname: data.data.metadata.lastname,
+          paidAmount: "GHS. " + amount.toLocaleString(),
+          plotDetails:
+            "Plot Number " +
+            allDetails.properties.Plot_No +
+            " " +
+            allDetails.properties.Street_Nam,
+          plotSize:
+            parseFloat(allDetails.properties.Shape_Length.toFixed(5)) +
+            " Acres ",
+        }),
+      });
+      setVerifyLoading(false);
       toast.success("Transaction verified successfully");
-      router.push('/nthc/payment/success')
+      router.push("/nthc/payment/success");
     }
     if (error) {
       console.log(error);
@@ -1445,7 +1465,7 @@ const EditPlot = () => {
                       type="submit"
                       className="bg-primary text-white py-2 px-4 rounded-md shadow-md"
                     >
-                      {loader2 ? (
+                      {verifyLoading ? (
                         <Loader className="animate-spin" />
                       ) : (
                         "Proceed to Payment"

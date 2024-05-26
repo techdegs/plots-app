@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 const page = () => {
   const [plots, setPlots] = useState([]);
   const [center, setCenter] = useState({
-    lng: -1.6633491209999534,
-    lat: 6.6715352750000534,
+    lng: -1.499152922013753,
+    lat: 6.759245559146633,
   });
 
   useEffect(() => {

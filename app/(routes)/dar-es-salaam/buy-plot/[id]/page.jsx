@@ -254,7 +254,7 @@ const EditPlot = () => {
 
     onSuccess: (response) => {
       if (response.status === "success") {
-        setVerifyLoading(true)
+        setVerifyLoading(true);
         toast.success("Thank you! your payment was made");
         verifyTransaction(response.reference);
       }
@@ -263,6 +263,7 @@ const EditPlot = () => {
   };
 
   const verifyTransaction = async (reference) => {
+    setVerifyLoading(true)
     const secretKey = process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY;
 
     try {
@@ -293,7 +294,7 @@ const EditPlot = () => {
             // json.parse(data.data)
 
             //Update plot details with plotData on Supabase
-            savePaymentDetails(paymentData, amount, data)
+            savePaymentDetails(paymentData, amount, data);
           } else {
             toast.error("Your Transaction verification was not successfull");
             router.push("/dar-es-salaam/payment/error");
@@ -313,7 +314,7 @@ const EditPlot = () => {
   };
 
   const savePaymentDetails = async (paymentData, amount, data) => {
-    const { data:dbData, error } = await supabase
+    const { data: dbData, error } = await supabase
       .from("dar_es_salaam")
       .update({
         firstname: data.data.metadata.firstname,
@@ -329,20 +330,47 @@ const EditPlot = () => {
         paymentDetails: paymentData,
         paymentId: data.data.id,
         paymentReference: data.data.reference,
-        status: 'Sold'
+        status: "Sold",
       })
       .eq("id", id)
       .select();
 
     if (dbData) {
-      setVerifyLoading(false)
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: data.data.metadata.email,
+          firstname: data.data.metadata.firstname,
+          lastname: data.data.metadata.lastname,
+          paidAmount: "GHS. " + amount.toLocaleString(),
+          plotDetails:
+            "Plot Number " +
+            allDetails.properties.Plot_No +
+            " " +
+            allDetails.properties.Street_Nam,
+          plotSize:
+            parseFloat(
+              allDetails.properties.Shape_Length !== undefined
+                ? allDetails.properties.Shape_Length.toFixed(5)
+                : allDetails.properties.SHAPE_Leng.toFixed(5)
+            ) + " Acres ",
+        }),
+      });
+      setVerifyLoading(false);
       toast.success("Transaction verified successfully");
-      router.push('/nthc/payment/success')
+      router.push("/dar-es-salaam/payment/success");
     }
     if (error) {
       console.log(error);
     }
   };
+
+  {
+    verifyLoading && <Loader className="animate-spin" />;
+  }
 
   return (
     <>
@@ -385,7 +413,9 @@ const EditPlot = () => {
                         name="plotSize"
                         value={
                           parseFloat(
-                            allDetails.properties.Shape_Length.toFixed(5)
+                            allDetails.properties.Shape_Length !== undefined
+                              ? allDetails.properties.Shape_Length.toFixed(5)
+                              : allDetails.properties.SHAPE_Leng.toFixed(5)
                           ) + " Acres "
                         }
                       />
@@ -1487,7 +1517,9 @@ const EditPlot = () => {
                         name="plotSize"
                         value={
                           parseFloat(
-                            allDetails.properties.Shape_Length.toFixed(5)
+                            allDetails.properties.Shape_Length !== undefined
+                              ? allDetails.properties.Shape_Length.toFixed(5)
+                              : allDetails.properties.SHAPE_Leng.toFixed(5)
                           ) + " Acres "
                         }
                       />
@@ -1507,7 +1539,7 @@ const EditPlot = () => {
                       )}
                     </button>
 
-                    {loader3 ? (
+                    {verifyLoading ? (
                       <Loader className="animate-spin" />
                     ) : (
                       <PaystackButton {...componentProps} />
