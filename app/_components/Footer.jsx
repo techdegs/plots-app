@@ -72,6 +72,9 @@ const Footer = () => {
           <div className="flex-1 basis-[10rem]">
             <h2 className="text-xl font-semibold">Quick Links</h2>
             <ul>
+            <li className="my-2 text-muted">
+                <Link href="/contact-us" className="text-sm hover:underline"> Contact Us</Link>
+              </li>
               <li className="my-2 text-muted">
                 <a href="#" className="text-sm hover:underline"> About Us</a>
               </li>
