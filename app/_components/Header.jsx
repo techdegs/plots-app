@@ -73,18 +73,6 @@ const HeaderAlt = () => {
           </NavigationMenuItem>
 
           <NavigationMenuItem>
-            <ListItem href={"/get-plot"} title={"Get Plot"}>
-              Get Plot
-            </ListItem>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
-            <ListItem href={"/get-home"} title={"Get Home"}>
-              Get Home
-            </ListItem>
-          </NavigationMenuItem>
-
-          <NavigationMenuItem>
             <NavigationMenuTrigger
               className={`flex border-0 items-center hover:text-primary text-base ${
                 (path === "/nthc" && "text-primary font-extrabold") ||
@@ -108,6 +96,19 @@ const HeaderAlt = () => {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <ListItem href={"/get-plot"} title={"Get Plot"}>
+              Get Plot
+            </ListItem>
+          </NavigationMenuItem>
+
+          <NavigationMenuItem>
+            <ListItem href={"/get-home"} title={"Get Home"}>
+              Get Home
+            </ListItem>
+          </NavigationMenuItem>
+
 
           {/* <NavigationMenuItem>
             <NavigationMenuTrigger
