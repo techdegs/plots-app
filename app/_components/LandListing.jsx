@@ -86,24 +86,7 @@ const LandListing = ({
                   </h2>
                 </div>
                 <div className="bg-slate-100 rounded-md p-2 text-gray-400 mt-3">
-                  <div className="flex items-center justify-between text-sm mt-3 border-b pb-2">
-                    <p className="flex items-center gap-1">
-                      <BedDouble className="h-4 w-4" /> <span>Bedrooms</span>
-                    </p>
-                    <p className="">
-                      <span>{item?.bedroom}</span>
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-between text-sm py-2 border-b">
-                    <p className="flex items-center gap-1">
-                      <Bath className="h-4 w-4" /> <span>Bathrooms</span>
-                    </p>
-                    <p className="">
-                      <span>{item?.bathroom}</span>
-                    </p>
-                  </div>
-
+                  
                   <div className="flex items-center justify-between text-sm py-2 border-b">
                     <p className="flex items-center gap-1">
                       <Ruler className="h-4 w-4" /> <span>Area Size</span>
@@ -113,14 +96,7 @@ const LandListing = ({
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between text-sm py-2">
-                    <p className="flex items-center gap-1">
-                      <CarFront className="h-4 w-4" /> <span>Parking Area</span>
-                    </p>
-                    <p className="">
-                      <span>{item?.parking} </span>
-                    </p>
-                  </div>
+                  
                 </div>
 
                 <Button className="w-full my-2 text-base cursor-pointer" onClick={() => router.push('/view-land-listing/' +item.id)}>
