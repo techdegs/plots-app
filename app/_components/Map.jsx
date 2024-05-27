@@ -130,11 +130,11 @@ const Map = ({ parcels, center }) => {
         <div class="px-6 py-4 flex flex-col">
           <div class="font-bold md:text-lg lg:text-lg text-sm mb-2">Plot Number ${text1}, ${text2}</div>
           <hr />
-          <a style="display: ${status === 'Sold'? 'none': 'block'}"  href="${path}/buy-plot/${id}" class="border px-4 py-1 mt-3 mb-1 rounded-md text-sm font-normal">
+          <a style="display: ${status === 'Sold' || status === 'Reserved' ? 'none': 'block'}"  href="${path}/buy-plot/${id}" class="border px-4 py-1 mt-3 mb-1 rounded-md text-sm font-normal">
             Buy Plot
           </a>
 
-          <a style="display: ${status === 'Reserved'? 'none': 'block'}" href="${path}/reserve-plot/${id}" id="reserve_plot_button" class="border mb-1 px-4 py-1 my-2 rounded-md text-sm font-normal">
+          <a style="display: ${status === 'Reserved' || status === 'Sold' ? 'none': 'block'}" href="${path}/reserve-plot/${id}" id="reserve_plot_button" class="border mb-1 px-4 py-1 my-2 rounded-md text-sm font-normal">
             Reserve Plot
           </a>
 
