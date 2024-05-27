@@ -41,7 +41,7 @@ const Details = ({ listingDetails }) => {
       <div className="p-2 mb-4">
         <h2 className="text-primary text-xl font-bold">Property Description</h2>
         <p>{listingDetails?.description}</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem, dolore! Reprehenderit, praesentium ea necessitatibus nostrum illum voluptates maxime perferendis quo asperiores rerum, eius eligendi atque odit autem! Minus, vero esse?</p>
+       
       </div>
 
       <div className="p-2">
