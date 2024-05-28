@@ -10,39 +10,14 @@ import Link from "next/link";
 import React, { useState } from "react";
 
 const MarkerListingItem = ({ item, closeHandler, images }) => {
-  const [directions, setDirections] = useState(null);
-  const [response, setResponse] = useState(null);
-  const [showDirectionsInput, setShowDirectionsInput] = useState(false);
-  const [startLocation, setStartLocation] = useState("");
-  const [useCurrentLocation, setUseCurrentLocation] = useState(false);
-
-  const productLocation = {
-    lat: item.coordinates.lat,
-    lng: item.coordinates.lng,
-  };
-
-  const directionsCallback = (response) => {
-    if (response !== null) {
-      if (response.status === "OK") {
-        setDirections(response);
-        setResponse(response.routes[0].legs[0]);
-      } else {
-        console.error("response: ", response);
-      }
-    }
-  };
 
   const handleGetDirections = () => {
-    const container = document.getElementById("locationContainer")
+    const container = document.getElementById("locate")
     container.style.display = 'block'
-    container.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById("locationContainer").scrollTop = 0
     closeHandler()
   };
 
-  const handleCalculateRoute = () => {
-    setDirections(null);
-    setResponse(null);
-  };
   return (
     <>
       <div className=" relative shadow-lg rounded p-2 hover:border hover:border-primary w-[420px] max-w-48 bg-white">

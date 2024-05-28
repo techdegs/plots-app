@@ -36,7 +36,6 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
     lng: listing[0]?.coordinates.lng,
   };
 
-  console.log(useCurrentLocation)
   const handleGetDirections = () => {
     if (useCurrentLocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -61,10 +60,6 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
           toast.error("Sorry Error getting direction. \nTry again later");
         }
 
-        // setStartLocation({
-        //   lat: position.coords.latitude,
-        //   lng: position.coords.longitude,
-        // });
       });
     } else if (locationCord) {
       directionsService.route(
@@ -74,9 +69,11 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
           travelMode: google.maps.TravelMode.DRIVING,
         },
         (response) => {
-          //console.log(response)
           if (response.status === "OK") {
             setDirections(response);
+          }
+          if(response.status ==="ZERO_RESULTS"){
+            toast.error("Sorry Error getting directions. \nTry again with different location closer");
           }
         }
       );
@@ -120,9 +117,9 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
   }, []);
 
   return (
-    <div className="shadow-md w-full relative">
+    <div className="shadow-md w-full relative" id="locationContainer">
       <div
-        id="locationContainer"
+        id="locate"
         style={{ display: "none" }}
         className="my-4  flex flex-col space-y-2 lg:px-36 md:px-24 px-10 xl:px-36"
       >
