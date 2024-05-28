@@ -17,6 +17,10 @@ const Provider = ({ children }) => {
           "routes",
           "visualization",
           "drawing",
+          "core",
+          "geometry", 
+          "streetView",
+          "journeySharing"
         ]}
       >
         {/* <Header /> */}

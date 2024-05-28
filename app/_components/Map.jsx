@@ -130,11 +130,15 @@ const Map = ({ parcels, center }) => {
         <div class="px-6 py-4 flex flex-col">
           <div class="font-bold md:text-lg lg:text-lg text-sm mb-2">Plot Number ${text1}, ${text2}</div>
           <hr />
-          <a style="display: ${status === 'Sold' || status === 'Reserved' ? 'none': 'block'}"  href="${path}/buy-plot/${id}" class="border px-4 py-1 mt-3 mb-1 rounded-md text-sm font-normal">
+          <a style="display: ${
+            status === "Sold" || status === "Reserved" ? "none" : "block"
+          }"  href="${path}/buy-plot/${id}" class="border px-4 py-1 mt-3 mb-1 rounded-md text-sm font-normal">
             Buy Plot
           </a>
 
-          <a style="display: ${status === 'Reserved' || status === 'Sold' ? 'none': 'block'}" href="${path}/reserve-plot/${id}" id="reserve_plot_button" class="border mb-1 px-4 py-1 my-2 rounded-md text-sm font-normal">
+          <a style="display: ${
+            status === "Reserved" || status === "Sold" ? "none" : "block"
+          }" href="${path}/reserve-plot/${id}" id="reserve_plot_button" class="border mb-1 px-4 py-1 my-2 rounded-md text-sm font-normal">
             Reserve Plot
           </a>
 
@@ -238,12 +242,13 @@ const Map = ({ parcels, center }) => {
   }
 
   const hanldeSaveNewPrice = async () => {
-    setLoading(true)
+    setLoading(true);
     let newPrice = document.getElementById("newPrice").value;
     let newAmount;
     if (newPrice === undefined || newPrice === "" || newPrice === null) {
       toast.error("Check the new Price");
-      setNewPriceEr(true); setLoading(false);
+      setNewPriceEr(true);
+      setLoading(false);
       return;
     } else {
       newAmount = parseFloat(newPrice);
@@ -287,7 +292,7 @@ const Map = ({ parcels, center }) => {
         setLoading(false);
         setModalOpen(false);
         console.error("Error fetching data:", error);
-        toast.error("Sorry Error occured updating the plot price")
+        toast.error("Sorry Error occured updating the plot price");
         return; // Exit the function if there's an error
       }
 
@@ -320,8 +325,6 @@ const Map = ({ parcels, center }) => {
     }
 
     saveInfo(remainingAmount, newAmount, paidAmount, database);
-
-
   };
 
   const saveInfo = async (remainingAmount, newAmount, paidAmount, database) => {
@@ -341,7 +344,6 @@ const Map = ({ parcels, center }) => {
       setLoading(false);
       setModalOpen(false);
       window.location.reload();
-      
     }
     if (error) {
       setLoading(false);
@@ -350,7 +352,7 @@ const Map = ({ parcels, center }) => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center relative">
       {modalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded shadow-lg">
@@ -396,13 +398,7 @@ const Map = ({ parcels, center }) => {
             </div>
             <DialogFooter>
               <Button onClick={hanldeSaveNewPrice} type="button">
-                {
-                  loading ? (
-                    <Loader className="animate-spin" />
-                  ): (
-                    "Save changes"
-                  )
-                }
+                {loading ? <Loader className="animate-spin" /> : "Save changes"}
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -414,7 +410,23 @@ const Map = ({ parcels, center }) => {
         zoom={zoom}
         onLoad={onLoad}
         onUnmount={onUnmount}
+        className="relative"
       >
+        <div className="absolute w-40 top-20 left-0 bg-white/90 shadow-md">
+          <div className="flex gap-3 max-w-36 items-center pl-2 pt-3">
+            <div className="w-4 h-4 bg-green-800"></div>
+            <span>Available</span>
+          </div>
+          <div className="flex gap-3 max-w-36 items-center pl-2 mt-2">
+            <div className="w-4 h-4 bg-black"></div>
+            <span>Reserved</span>
+          </div>
+          <div className="flex gap-3 max-w-36 items-center pl-2 mt-2 pb-3">
+            <div className="w-4 h-4 bg-red-600"></div>
+            <span>Sold</span>
+          </div>
+        </div>
+
         {parcels?.map((feature, index) => (
           <>
             <Polygon
