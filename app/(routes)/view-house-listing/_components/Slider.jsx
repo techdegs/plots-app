@@ -23,6 +23,7 @@ const Slider = ({ imageLists }) => {
                       src={image.url}
                       width={700}
                       height={300}
+                      alt="Property Image"
                     />
                   </CardContent>
                 </div>
