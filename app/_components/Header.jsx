@@ -46,7 +46,7 @@ const HeaderAlt = () => {
     router.prefetch('/get-plot')
     router.prefetch('/nthc')
     router.prefetch('/trabuom')
-  }, [])
+  }, [router]);
 
   return (
     <div className="flex items-center px-8 md:px-12 lg:px-12 xl:px-12 py-2 justify-between fixed top-0 w-full shadow-sm z-50 bg-white">
