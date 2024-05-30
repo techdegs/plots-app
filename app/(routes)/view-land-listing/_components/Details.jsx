@@ -18,7 +18,7 @@ const Details = ({ listingDetails }) => {
         </div>
         <Button className="hidden lg:flex xl:flex items-center bg-primary text-white">
           {" "}
-          <Upload /> <span className="text-lg ml-2"> Share</span>
+          <span className="text-lg ml-2"> Checkout</span>
         </Button>
       </div>
 

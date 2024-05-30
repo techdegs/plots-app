@@ -8,6 +8,7 @@ import Slider from "../_components/Slider";
 import Details from "../_components/Details";
 import GoogleMapSection from "@/app/_components/GoogleMapSection";
 import AgentDetails from "../_components/AgentDetails";
+import Image from "next/image";
 
 const ViewListing = () => {
   const [listingDetails, setListingDetails] = useState();
@@ -42,9 +43,12 @@ const ViewListing = () => {
           <Details listingDetails={listingDetails} />
         </div>
         <div className="mt-4">
-          <h2 className="font-bold text-2xl text-center mb-4 text-primary">
-            Find on Map
-          </h2>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <h2 className="font-bold text-2xl text-center mb-4 text-primary">
+              Find on Map
+            </h2>
+            <Image width={100} height={100} className="w-10 h-10 object-contain -mt-6" alt="icon" src={'/location-house-pin.png'} />
+          </div>
           <GoogleMapSection
             searchedCoordinates={listingDetails?.coordinates}
             listing={[listingDetails]}
@@ -52,7 +56,7 @@ const ViewListing = () => {
           />
         </div>
         <div className="my-6">
-        <h2 className="text-primary text-2xl font-bold mb-6">Agent Info</h2>
+          <h2 className="text-primary text-2xl font-bold mb-6">Agent Info</h2>
           <AgentDetails listingDetails={[listingDetails]} />
         </div>
       </div>

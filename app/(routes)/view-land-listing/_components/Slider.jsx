@@ -20,7 +20,7 @@ const Slider = ({ imageLists }) => {
                   <CardContent className="flex items-center justify-center p-2 mt-4">
                     <Image
                       className="rounded-xl object-cover h-[400px] w-full"
-                      src={image.url}
+                      src={image?.url}
                       width={700}
                       height={300}
                       alt="Land Image"
