@@ -1,14 +1,14 @@
 import LandListingMapView from '@/app/_components/LandListingMapView'
 import React from 'react'
 
-const Listings = () => {
+const GetPlot = () => {
   return (
-    <div className="w-full">
-      <div className="px-10 p-10">
+    <div className="w-full bg-white">
+      <div className="px-10 bg-white">
         <LandListingMapView />
       </div>
     </div>
   )
 }
 
-export default Listings
+export default GetPlot

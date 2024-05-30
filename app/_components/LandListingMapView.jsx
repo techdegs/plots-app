@@ -38,40 +38,40 @@ const LandListingMapView = () => {
 
   const handleSearchClick = async () => {
     setShowSA(false);
-    const searchTerm = searchedAddress?.value?.structured_formatting?.main_text;
+    // const searchTerm = searchedAddress?.value?.structured_formatting?.main_text;
 
-    if (searchTerm != "") {
-      let query = supabase
-        .from("landlistings")
-        .select("*, landListingImages(url, listing_id, id)")
-        //.eq("active", true)
-        .eq("type", type)
-        .like("address", "%" + searchTerm + "%")
-        .order("created_at", { ascending: false });
+    // if (searchTerm != "") {
+    //   let query = supabase
+    //     .from("landlistings")
+    //     .select("*, landListingImages(url, listing_id, id)")
+    //     //.eq("active", true)
+    //     .eq("type", type)
+    //     .like("address", "%" + searchTerm + "%")
+    //     .order("created_at", { ascending: false });
 
-      if (landType) {
-        query = query.eq("propertyType", landType);
-      }
-      const { data, error } = await query;
+    //   if (landType) {
+    //     query = query.eq("propertyType", landType);
+    //   }
+    //   const { data, error } = await query;
 
-      if (data) {
-        setShowSA(true);
-        setGetSearchResult(false);
-        setListing(data);
-      } else {
-        setShowSA(true);
-        console.log("nothing");
-        setGetSearchResult(true);
-      }
-      if (error) {
-        setShowSA(false);
-        toast("Sorry something went wrong with the search");
-        console.log(error);
-      }
-    } else {
-      setShowSA(false);
-      toast("Sorry something went wrong with the search");
-    }
+    //   if (data) {
+    //     setShowSA(true);
+    //     setGetSearchResult(false);
+    //     setListing(data);
+    //   } else {
+    //     setShowSA(true);
+    //     console.log("nothing");
+    //     setGetSearchResult(true);
+    //   }
+    //   if (error) {
+    //     setShowSA(false);
+    //     toast("Sorry something went wrong with the search");
+    //     console.log(error);
+    //   }
+    // } else {
+    //   setShowSA(false);
+    //   toast("Sorry something went wrong with the search");
+    // }
   };
 
   return (

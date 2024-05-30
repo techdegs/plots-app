@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -77,13 +77,14 @@
   }
 }
 
-*{
-  font-family: 'Outfit', sans-serif
+* {
+  font-family: "Outfit", sans-serif;
 }
 
-html, body {
+html,
+body {
   @apply scroll-smooth;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
 }
 
 *::-webkit-scrollbar {
@@ -116,21 +117,31 @@ html, body {
 }
 
 .fixed-column {
+  position: -webkit-fixed; /* For Safari */
   position: fixed;
-  top: 2;
+  top: 100px;
   right: 0;
   height: 100vh;
   overflow-y: auto;
+}
+
+.fixed-column1 {
+  position: -webkit-fixed; /* For Safari */
+  position: fixed;
+  top: 100px;
+  left: 2rem;
+  overflow-y: auto;
+  height: 6.3rem;
 }
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .no-scrollbar {
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
-.gm-ui-hover-effect span{
+.gm-ui-hover-effect span {
   pointer-events: none;
   display: block;
   width: 24px !important;
@@ -141,6 +152,6 @@ html, body {
   margin-left: -7px !important;
 }
 
-.gm-ui-hover-effect span:hover{
+.gm-ui-hover-effect span:hover {
   color: red;
 }

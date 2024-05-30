@@ -28,7 +28,7 @@ const ListingMapView = ({ type }) => {
       .from("houselistings")
       .select("*, houseListingImages(url, listing_id, id)")
       //.eq("active", true)
-      .eq("type", type)
+      //.eq("type", type)
       .order("created_at", { ascending: false });
 
     if (data) {
@@ -41,43 +41,43 @@ const ListingMapView = ({ type }) => {
 
   const handleSearchClick = async () => {
     setShowSA(false)
-    const searchTerm = searchedAddress?.value?.structured_formatting?.main_text;
+    // const searchTerm = searchedAddress?.value?.structured_formatting?.main_text;
     
-    if (searchTerm != "") {
-      let query = supabase
-        .from("houselistings")
-        .select("*, houseListingImages(url, listing_id, id)")
-        //.eq("active", true)
-        .eq("type", type)
-        .gte("bedroom", bedCount)
-        .gte("bathroom", bathCount)
-        .gte("parking", parkingCount)
-        .like('address','%'+searchTerm+'%')
-        .order("created_at", { ascending: false });
+    // if (searchTerm != "") {
+    //   let query = supabase
+    //     .from("houselistings")
+    //     .select("*, houseListingImages(url, listing_id, id)")
+    //     //.eq("active", true)
+    //     .eq("type", type)
+    //     .gte("bedroom", bedCount)
+    //     .gte("bathroom", bathCount)
+    //     .gte("parking", parkingCount)
+    //     .like('address','%'+searchTerm+'%')
+    //     .order("created_at", { ascending: false });
 
-      if(homeType){
-        query = query.eq('propertyType', homeType)
-      }
-      const {data, error} = await query  
+    //   if(homeType){
+    //     query = query.eq('propertyType', homeType)
+    //   }
+    //   const {data, error} = await query  
 
-      if (data) {
-        setShowSA(true)
-        setGetSearchResult(false)
-        setListing(data);
-      }else{
-        setShowSA(true)
-        console.log('nothing')
-        setGetSearchResult(true)
-      }
-      if (error) {
-        setShowSA(false)
-        toast('Sorry something went wrong with the search')
-        console.log(error);
-      }
-    }else{
-      setShowSA(false)
-      toast('Sorry something went wrong with the search')
-    }
+    //   if (data) {
+    //     setShowSA(true)
+    //     setGetSearchResult(false)
+    //     setListing(data);
+    //   }else{
+    //     setShowSA(true)
+    //     console.log('nothing')
+    //     setGetSearchResult(true)
+    //   }
+    //   if (error) {
+    //     setShowSA(false)
+    //     toast('Sorry something went wrong with the search')
+    //     console.log(error);
+    //   }
+    // }else{
+    //   setShowSA(false)
+    //   toast('Sorry something went wrong with the search')
+    // }
   };
 
   return (

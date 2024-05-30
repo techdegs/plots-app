@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter()
   return (
     <div
       className="relative z-0 flex flex-wrap min-h-screen gap-2 mt-0 md:-mt-10 flex-center-center pt-12 lg:px-14 md:px-14 px-8"
@@ -23,7 +25,7 @@ const Hero = () => {
             real-time updates, your next home is just a tap away. 
           </p>
         </div>
-        <Button className="mt-4 btn-primary capitalize text-base">get started</Button>
+        <Button onClick={() => router.push('/get-home')} className="mt-4 btn-primary capitalize text-base">get started</Button>
         <div className="mt-6 text-center flex flex-align-center gap-x-6">
           <div className="bg-cyan-100 p-2">
             <h1 className="text-xl font-bold">

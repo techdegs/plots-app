@@ -4,7 +4,7 @@ import React from 'react'
 const Listings = () => {
   return (
     <div className="w-full">
-      <div className="px-10 p-10">
+      <div className="px-10">
         <ListingMapView type='For Sell' />
       </div>
     </div>

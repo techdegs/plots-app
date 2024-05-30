@@ -99,13 +99,13 @@ const HeaderAlt = () => {
 
           <NavigationMenuItem>
             <ListItem href={"/get-plot"} title={"Get Plot"}>
-              Get Property
+              Get Land
             </ListItem>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
             <ListItem href={"/get-home"} title={"Get Home"}>
-              Get Home
+              Get Property
             </ListItem>
           </NavigationMenuItem>
 
@@ -263,7 +263,7 @@ const HeaderAlt = () => {
                   }`}
                   onClick={() => router.push("/get-plot")}
                 >
-                  Get Property
+                  Get Land
                 </button>
               </DropdownMenuItem>
               <DropdownMenuItem>
@@ -273,7 +273,7 @@ const HeaderAlt = () => {
                   }`}
                   onClick={() => router.push("/get-home")}
                 >
-                  Get Home
+                  Get Property
                 </button>
               </DropdownMenuItem>
             </DropdownMenuGroup>
