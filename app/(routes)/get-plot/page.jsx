@@ -3,8 +3,8 @@ import React from 'react'
 
 const GetPlot = () => {
   return (
-    <div className="w-full bg-white">
-      <div className="px-10 bg-white">
+    <div className="w-full bg-white pb-14">
+      <div className="px-10">
         <LandListingMapView />
       </div>
     </div>

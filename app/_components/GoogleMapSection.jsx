@@ -164,7 +164,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
   }, []);
 
   return (
-    <div className="shadow-md w-full relative" id="locationContainer">
+    <div className="shadow-md w-full relative mb-12" id="locationContainer">
       <div
         id="locate"
         style={{ display: "none" }}
@@ -222,7 +222,7 @@ const GoogleMapSection = ({ searchedCoordinates, listing, images }) => {
         onLoad={onLoad}
         onUnmount={onUnmount}
         gestureHandling="greedy"
-        className="relative"
+        className="relative mb-6"
       >
         {isLoading && (
           <div className="absolute w-full h-full bg-black/60 pt-[8rem]">

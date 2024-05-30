@@ -120,9 +120,11 @@ body {
   position: -webkit-fixed; /* For Safari */
   position: fixed;
   top: 100px;
-  right: 0;
+  right: 10px;
   height: 100vh;
   overflow-y: auto;
+  margin-bottom: 2.5rem;
+  bottom: 50px;
 }
 
 .fixed-column1 {

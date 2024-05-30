@@ -100,7 +100,7 @@ const ListingMapView = ({ type }) => {
         />
       </div>
 
-      <div className="w-full md:w-1/2 lg:w-1/2 fixed-column ml-8 hidden md:block lg:block xl:block">
+      <div className="w-full md:w-1/2 lg:w-1/2 fixed-column ml-8 hidden md:block lg:block xl:block  pb-24">
         <GoogleMapSection listing={listing} searchedCoordinates={searchedCoordinates} images={listing[0]?.houseListingImages} />
       </div>
     </div>
