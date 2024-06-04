@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import ToastMessage from "./_components/ToastMessage";
 
 export const metadata = {
+  developer: "Samuel Osei Adu",
   title: "GOP",
   description: "Get-One-Plot, Where listing of properties and land purchase made easy",
 };

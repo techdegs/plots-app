@@ -351,6 +351,14 @@ const Map = ({ parcels, center }) => {
     }
   };
 
+  const handleInput = (event) => {
+    const charCode = event.which ? event.which : event.keyCode;
+    // Prevent input if the key is not a number (0-9)
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <div className="w-full flex flex-col items-center justify-center relative">
       {modalOpen && (
@@ -393,6 +401,7 @@ const Map = ({ parcels, center }) => {
                   type="number"
                   id="newPrice"
                   style={{ border: newPriceEr && "1px solid red" }}
+                  onKeyPress={handleInput}
                 />
               </div>
             </div>
