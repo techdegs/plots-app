@@ -376,7 +376,7 @@ const ReservePlot = () => {
             " " +
             allDetails.properties.Street_Nam,
           plotSize:
-            parseFloat(allDetails.properties.Shape_Length.toFixed(5)) +
+            parseFloat(allDetails?.properties?.Shape_Length?.toFixed(5)) +
             " Acres ",
         }),
       });
@@ -430,7 +430,7 @@ const ReservePlot = () => {
                         name="plotSize"
                         value={
                           parseFloat(
-                            allDetails.properties.Shape_Length.toFixed(5)
+                            allDetails?.properties?.Shape_Length?.toFixed(5)
                           ) + " Acres "
                         }
                       />
@@ -1560,7 +1560,7 @@ const ReservePlot = () => {
                         name="plotSize"
                         value={
                           parseFloat(
-                            allDetails.properties.Shape_Length.toFixed(5)
+                            allDetails?.properties?.Shape_Length?.toFixed(5)
                           ) + " Acres "
                         }
                       />

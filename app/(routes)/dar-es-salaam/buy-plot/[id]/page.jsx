@@ -354,8 +354,8 @@ const EditPlot = () => {
           plotSize:
             parseFloat(
               allDetails.properties.Shape_Length !== undefined
-                ? allDetails.properties.Shape_Length.toFixed(5)
-                : allDetails.properties.SHAPE_Leng.toFixed(5)
+                ? allDetails?.properties?.Shape_Length?.toFixed(5)
+                : allDetails?.properties?.SHAPE_Leng?.toFixed(5)
             ) + " Acres ",
         }),
       });
@@ -414,8 +414,8 @@ const EditPlot = () => {
                         value={
                           parseFloat(
                             allDetails.properties.Shape_Length !== undefined
-                              ? allDetails.properties.Shape_Length.toFixed(5)
-                              : allDetails.properties.SHAPE_Leng.toFixed(5)
+                              ? allDetails?.properties?.Shape_Length?.toFixed(5)
+                              : allDetails?.properties?.SHAPE_Leng?.toFixed(5)
                           ) + " Acres "
                         }
                       />
@@ -1518,8 +1518,8 @@ const EditPlot = () => {
                         value={
                           parseFloat(
                             allDetails.properties.Shape_Length !== undefined
-                              ? allDetails.properties.Shape_Length.toFixed(5)
-                              : allDetails.properties.SHAPE_Leng.toFixed(5)
+                              ? allDetails?.properties?.Shape_Length?.toFixed(5)
+                              : allDetails?.properties?.SHAPE_Leng?.toFixed(5)
                           ) + " Acres "
                         }
                       />
